@@ -1,13 +1,13 @@
-(* Verification of Isabelle
+(* Verification of Isabelle's FOL library
 1)
 *)
-
+(* use Isabelle notation in comments *)
 Inductive Types : Set :=
-| TVar : nat -> Types
-| TImp : Types -> Types -> Types
-| TProp : Types
-| TO : Types (* bool=object logic propositions *)
-| TI : Types (* individual objects *)
+| TVar : nat -> Types (* x0 x1 x2 ... *)
+| TImp : Types -> Types -> Types (* "=>" *)
+| TProp : Types (* "prop" *)
+| TO : Types (* "o"=bool=object logic propositions *)
+| TI : Types (* "i"=individual objects -- from ZF_base.thy *)
 .
 
 Check Types.
