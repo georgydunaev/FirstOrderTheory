@@ -3,7 +3,7 @@
 *)
 (* use Isabelle notation in comments *)
 Inductive Types : Set :=
-| TVar : nat -> Types (* x0 x1 x2 ... *)
+| TVar : nat -> Types (* 'a 'b 'c ... *)
 | TImp : Types -> Types -> Types (* "=>" *)
 | TProp : Types (* "prop" *)
 | TO : Types (* "o"=bool=object logic propositions *)
@@ -12,17 +12,17 @@ Inductive Types : Set :=
 
 Check Types.
 
-(* meta and object constants *)
-Inductive MC : Set :=
-| LRA : MC (* ==> : prop => prop => prop *)
-| BA : MC (* !! : (a => prop) => prop *)
-| TP : MC (* Trueprop : o => prop *)
-| Impl : MC (* --> : [o, o] => o *)
-| Fora : MC (* \forall : (i => o) => o *)
+(* primitive Terms i.e. constants *)
+Inductive PT : Set :=
+| LRA : PT (* ==> : prop => prop => prop *)
+| BA : PT (* !! : (a => prop) => prop *)
+| TP : PT (* Trueprop : o => prop *)
+| Impl : PT (* --> : [o, o] => o *)
+| Fora : PT (* \forall : (i => o) => o *)
 .
 
-(* metaconstants' types*)
-Fixpoint MCT (c : MC) : Types :=
+(* types of the primitive terms*)
+Fixpoint PTT (c : PT) : Types :=
 match c with
 | LRA => TImp TProp (TImp TProp TProp)
 | BA => TImp (TImp (TVar 0) TProp) TProp
@@ -32,10 +32,10 @@ match c with
 end.
 
 Inductive Terms : Set :=
-| MVar : nat -> Terms
-| MCon : MC -> Terms
-| MLam : nat -> Types -> Terms -> Terms
-| MApp : Terms -> Terms -> Terms
+| TVar : nat -> Terms (* x0 x1 x2 ... *)
+| TCon : PT -> Terms
+| TLam : nat -> Types -> Terms -> Terms
+| TApp : Terms -> Terms -> Terms
 .
 
 
@@ -65,6 +65,7 @@ inversion x.
 auto.
 Qed.
 
+(* meta and object constants *)
 
 
 
