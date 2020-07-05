@@ -6,7 +6,9 @@ Inductive Types : Set :=
 | TVar : nat -> Types (* 'a 'b 'c ... *)
 | TImp : Types -> Types -> Types (* "=>" *)
 | TProp : Types (* "prop" *)
+(* IFOL types *)
 | TO : Types (* "o"=bool=object logic propositions *)
+(* ZF types *)
 | TI : Types (* "i"=individual objects -- from ZF_base.thy *)
 .
 
@@ -28,8 +30,20 @@ Inductive PT : Set :=
 | LRA : PT (* ==> : prop => prop => prop *)
 | BA : PT (* !! : (a => prop) => prop *)
 | TP : PT (* Trueprop : o => prop *)
+(* OLD
 | Impl : PT (* --> : [o, o] => o *)
 | Fora : PT (* \forall : (i => o) => o *)
+*)
+(* IFOL terms: 
+  False :: ‹o› and
+  conj :: ‹[o, o] => o›  (infixr ‹∧› 35) and
+  disj :: ‹[o, o] => o›  (infixr ‹∨› 30) and
+  imp :: ‹[o, o] => o› 
+*)
+| EFalse : PT
+| Econj : PT
+| Edisj : PT
+| Eimp : PT
 .
 
 (* types of the primitive terms*)
@@ -38,8 +52,15 @@ match c with
 | LRA => TImp TProp (TImp TProp TProp)
 | BA => TImp (TImp (TVar 0) TProp) TProp
 | TP => TImp TO TI
+(*
 | Impl => TImp TO (TImp TO TO)
 | Fora => TImp (TImp TI TO) TO
+*)
+(* IFOL terms *)
+| EFalse => TO
+| Econj => TImp TO (TImp TO TO)
+| Edisj => TImp TO (TImp TO TO)
+| Eimp => TImp TO (TImp TO TO)
 end.
 
 Inductive Terms : Set :=
@@ -89,6 +110,71 @@ match t with
   end
 end.
 End Interpretation.
+
+(* Proofs *)
+(* Choose the basis of proofs: from IFOL.v or from Shen's book*)
+
+(* primitive Proofs i.e. constants *)
+Inductive PP : Set :=
+| conjI : PP (* ‹⟦P;  Q⟧ ⟹ P ∧ Q› *)
+(*| BA : PP (* !! : (a => prop) => prop *)
+| TP : PP (* Trueprop : o => prop *)
+| Impl : PP (* --> : [o, o] => o *)
+| Fora : PP (* \forall : (i => o) => o *) *)
+.
+
+(* STOP *)
+(* terms of the primitive proofs*)
+Fixpoint PPT (c : PP) : Terms :=
+match c with
+| conjI =>
+
+(EApp
+(EApp (ECon LRA)
+(EVar 0))
+
+(
+(EApp
+(EApp (ECon LRA)
+(EVar 1))
+(EApp (EApp (ECon Econj) (EVar 0)) (EVar 1))
+)
+)
+)
+
+end.
+
+(*
+| LRA => TImp TProp (TImp TProp TProp)
+| BA => TImp (TImp (TVar 0) TProp) TProp
+| TP => TImp TO TI
+| Impl => TImp TO (TImp TO TO)
+| Fora => TImp (TImp TI TO) TO
+*)
+end.
+
+Inductive Terms : Set :=
+| EVar : nat -> Terms (* x0 x1 x2 ... *)
+| ECon : PT -> Terms
+| ELam : nat -> Types -> Terms -> Terms
+| EApp : Terms -> Terms -> Terms
+.
+
+
+(* Soundness *)
+
+
+(*
+Inductive Terms2 :=
+| EVar2 : nat -> Terms2 (* x0 x1 x2 ... *)
+| ECon2 : PT -> Terms2
+| ELam2 : nat -> Types -> Terms2 -> Terms2
+| EApp2 : Terms2 -> Terms2 -> Terms2
+(* | c1 : Terms2 *)
+with TypeOfTerm2 :=
+| c2 : Terms2 -> TypeOfTerm2.
+*)
+
 
 Section Theory.
 Context (A:Set) (TCons : A -> Types)
