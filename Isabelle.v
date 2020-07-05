@@ -111,6 +111,12 @@ match t with
 end.
 End Interpretation.
 
+Definition EApp2 (x y z : Terms) : Terms
+ := EApp (EApp x y) z.
+
+Definition EApp3 (x y z w : Terms) : Terms
+ := EApp (EApp (EApp x y) z) w.
+
 (* Proofs *)
 (* Choose the basis of proofs: from IFOL.v or from Shen's book*)
 
@@ -123,11 +129,17 @@ Inductive PP : Set :=
 | Fora : PP (* \forall : (i => o) => o *) *)
 .
 
+
 (* STOP *)
 (* terms of the primitive proofs*)
-Fixpoint PPT (c : PP) : Terms :=
-match c with
-| conjI =>
+
+Definition conjI_type := 
+ EApp2 (ECon LRA) (EVar 0)
+ (EApp2 (ECon LRA) (EVar 1) 
+  (EApp2 (ECon Econj) (EVar 0) (EVar 1))
+ )
+.
+(* OLD:
 
 (EApp
 (EApp (ECon LRA)
@@ -142,7 +154,15 @@ match c with
 )
 )
 
+*)
+
+
+Fixpoint PPT (c : PP) : Terms :=
+match c with
+| conjI => conjI_type
 end.
+
+D
 
 (*
 | LRA => TImp TProp (TImp TProp TProp)
