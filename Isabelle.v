@@ -139,6 +139,8 @@ Definition conjI_type :=
   (EApp2 (ECon Econj) (EVar 0) (EVar 1))
  )
 .
+(* todo: make ECon and EVar a Coercion*)
+
 (* OLD:
 
 (EApp
@@ -162,6 +164,7 @@ match c with
 | conjI => conjI_type
 end.
 
+(* Alter*)
 D
 
 (*
