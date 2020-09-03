@@ -8,8 +8,15 @@ Context (typeval : typeconstants -> nat).
 (* Notation: tau, sigma, alpha *)
 Inductive Types : Type :=
 | TVar : nat -> Types (* "'a 'b 'c ..." *)
-| TCon (tc : typeconstants) : (Vector.t Types (typeval tc)) -> Types
+(** I decide to split the following constructor into parts. Otherwise the formalization is too heavy. **)
+(* | TCon (tc : typeconstants) : (Vector.t Types (typeval tc)) -> Types *)
+(** Parts: **)
+| TProp : Types (* "prop" !! *)
 | TImp : Types -> Types -> Types (* "=>" !! should be part of typeconstants !! *)
+(* Later:
+| TO : Types
+| TI : Types
+*)
 .
 
 Definition idsubst : nat -> Types
@@ -35,12 +42,23 @@ Context (Sigma : termconstants -> Types).
 
 (* Terms' Prf predicate. *)
 Section TPrf_sec.
+(*
 Context (G : nat -> Types).
-Inductive TPrf :  Terms -> Types -> Type :=
-| PEHyp (xn: nat) (tau : Types) : TPrf (EVar xn) (G xn)
-| PEConType (c : termconstants) (subst : nat -> Types) :
-    TPrf (ECon c subst) (dosubst subst (Sigma c))
-| PEApp t u tau sigma : TPrf t (TImp tau sigma) -> TPrf u tau -> TPrf (EApp t u) sigma
+
+*)
+Definition TCtx := nat -> Types.
+
+(*
+Definition addtotctx : TCtx -> nat -> Types -> TCtx
+  := fun G n tau => (fun m => {G m}+{m=n}).
+*)
+
+Inductive TPrf :  TCtx -> Terms -> Types -> Type :=
+| PEHyp G (xn: nat) (tau : Types) : TPrf G (EVar xn) (G xn)
+| PEConType G (c : termconstants) (subst : nat -> Types) :
+    TPrf G (ECon c subst) (dosubst subst (Sigma c))
+| PEApp G t u tau sigma : TPrf G t (TImp tau sigma) -> TPrf G u tau -> TPrf G (EApp t u) sigma
+| PELam G x t tau sigma: TPrf G t sigma -> TPrf G (ELam x tau t ) (TImp tau sigma)  (* TODO: FIX! *)
 .
 End TPrf_sec.
 Context (proofconstants:Set).
