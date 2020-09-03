@@ -33,8 +33,7 @@ Inductive Prf : prop -> Type :=
 (* Metalogic *)
 | A1 A B :  Prf (Iimpl A (Iimpl B A))
 | A2 A B C :  Prf (
-Iimpl (Iimpl A (Iimpl B C))
-(Iimpl (Iimpl A B) (Iimpl A C))
+Iimpl (Iimpl A (Iimpl B C)) (Iimpl (Iimpl A B) (Iimpl A C))
 )
 | MP A B : Prf (Iimpl A B) -> Prf A -> Prf B
 (* |  assu P : Prf (Iimpl P P) *)
@@ -51,6 +50,20 @@ Iimpl (Iimpl A (Iimpl B C))
    Prf (Iimp P Q) -> Prf P -> Prf Q
 .
 
+Inductive PrfCtx (G : prop -> Type): prop -> Type :=
+| ctx p : PrfCtx G p
+| ax p : Prf p -> PrfCtx G p
+.
+
+(*
+Inductive WithMP (G : prop -> Type): prop -> Type :=
+| Imp : forall (P Q : o),
+   WithMP (Iimp P Q) -> WithMP P -> WithMP Q
+*)
+
+
+
+
 Theorem Deduction (P Q:prop) (H : Prf P -> Prf Q)
 :  Prf (Iimpl P Q).
 Proof.
@@ -59,6 +72,8 @@ Abort.
 Context (P:prop).
 Check A2 P P P.*)
 
+(* The following is useful when one does not use context:
+(as it possibly done in Isabelle) *)
 Theorem assu P : Prf (Iimpl P P).
 Proof.
 refine (MP _ _ _ _).
@@ -79,12 +94,33 @@ Defined.
 Theorem dropR P Q R : Prf (Iimpl P R) 
  -> Prf (Iimpl P (Iimpl Q R)).
 Proof.
-intro H.
+refine (MP _ _ _).
+refine (MP _ _ _ _).
+refine (A2 _ _ _).
+refine (dropL _ _ _).
+refine (A1 _ _).
 Defined.
 
+(* Simple theorems: *)
 Definition ITrue : o := Iimp IFalse IFalse. 
 Theorem TrueI: Prf ITrue.
+Proof.
 unfold ITrue.
 apply IimpI.
+apply assu.
+Defined.
+(*--------------------------*)
+(* What if "inductive extension"? *)
+(*
+Axiom elems : forall A:Type, A -> Type.
+*)
 
-refine (IimpI _ _ ).
+
+Inductive bigunion {A} (f:A -> Type) : Type :=
+| c : forall n : A, f n -> bigunion f
+. (* exists *)
+
+(*| z : f 0 -> bigunion
+| s : forall n : nat,  *)
+
+Fixpoint q (n:nat) :=
