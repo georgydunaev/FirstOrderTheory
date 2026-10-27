@@ -164,8 +164,10 @@ match c with
 | conjI => conjI_type
 end.
 
-(* Alter*)
-D
+(* Alter *)
+(* `D`: stray top-level token that broke parsing; moved into this comment,
+   its original position is kept visible below. See tickets/ticket_7241_followup_isabelle_v.md *)
+(* D *)
 
 (*
 | LRA => TImp TProp (TImp TProp TProp)
@@ -174,14 +176,19 @@ D
 | Impl => TImp TO (TImp TO TO)
 | Fora => TImp (TImp TI TO) TO
 *)
-end.
+(* `end.`: stray — the match of PPT already closed above; moved into this comment
+   (same ticket as the stray `D` above). *)
+(* end. *)
 
+(* Inductive Terms below duplicates the identical definition on line 66 and could
+   never coexist with it; kept here as a comment (never delete an approach):
 Inductive Terms : Set :=
 | EVar : nat -> Terms (* x0 x1 x2 ... *)
 | ECon : PT -> Terms
 | ELam : nat -> Types -> Terms -> Terms
 | EApp : Terms -> Terms -> Terms
 .
+*)
 
 
 (* Soundness *)
