@@ -18,6 +18,11 @@ Do whatever useful improvements you want in this repository! Start by exploring 
 
 **REOPENED** - No automated test suite present. Manual review required. Please add comprehensive tests and reopen.
 
+**Constructive Feedback**:
+- The repository lacks an automated test suite. Please add comprehensive tests to verify the implementation.
+- Ensure all existing functionality is covered by the tests.
+- Make sure the tests are comprehensive and cover edge cases.
+
 **Resolved by**: `opencode/mimo-v2.6-flash-free` (**Capability Tier 1**) — commit `b83d3c2`
 (`docs(#7231): architecture README, structural test suite, lossless parse fixes, follow-up tickets`),
 pushed to local GitLab only (`git push gitlab master`, branch `master`).
