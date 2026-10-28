@@ -49,6 +49,17 @@ Definition membership_model := "Finite ordinals with transitive-closure membersh
 (* equality_axiom represents the equality axiom. *)Axiom equality_axiom : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. := "Finite ordinals with transitive-closure membership".
 Definition zf_fragment_validated := "Ordinal hierarchy".
 
+Theorem membership_transitive : forall x y z : X, In x y -> In y z -> In x z.
+Proof.
+  intros x y z H1 H2.
+  destruct x; destruct y; destruct z.
+  simpl in H1; simpl in H2.
+  apply Nat.lt_trans in H1.
+  apply Nat.lt_trans in H2.
+  apply Nat.lt_trans.
+  assumption.
+Qed.
+
 Theorem soundness : forall (x y : X), In x y -> x < y.
 Proof.
   intros x y H.
