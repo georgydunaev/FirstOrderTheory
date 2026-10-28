@@ -1,10 +1,9 @@
-Definition Terms_ind (T : Terms -> Prop)
-                       (H_FVC : forall sv, T (FVC sv))
-                       (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)),
-                                (forall i, T (Vector.nth v i)) -> T (FSC f v))
-                       (t:Terms) : T t.
+Definition Terms_ind (T : Terms -> Prop) (H_FVC : forall sv, T (FVC sv)) (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)),
+                                  (forall i, T (Vector.nth v i)) -> T (FSC f v)) (t:Terms) : T t.
+                                 (forall i, T (Vector.nth v i)) -> T (FSC f v)) (t:Terms) : T t.
 
-Theorem Terms_ind : forall (T : Terms -> Prop) (H_FVC : forall sv, T (FVC sv)) (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)), (forall i, T (Vector.nth v i)) -> T (FSC f v)) (t:Terms), T t.
+Theorem Terms_ind : forall (T : Terms -> Prop) (H_FVC : forall sv, T (FVC sv)) (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)),
+                                 (forall i, T (Vector.nth v i)) -> T (FSC f v)) (t:Terms), T t.
 Proof.
   induction t.
   - apply H_FVC.
@@ -13,32 +12,127 @@ Qed.
 
 Lemma term_substitution : forall (t1 t2 : Terms) (x : Var), Terms.
 Proof.
-  induction t1.
+  induction t1 as [| [f v IHv]].
   - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
   - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
-  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
-(* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
-(* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
-  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+Qed.
+Proof.
+  induction t1.
+  - (* Case for FVC constructor *) destruct t1; try (subst x); auto.\n  - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
+  - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
 Qed.
 
 Lemma term_equivalence : forall (t1 t2 : Terms), Terms -> Prop.
 Proof.
   induction t1.
-  - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
+  - (* Case for FVC constructor *) destruct t1; try (subst x); auto.\n  - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
   - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
-  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
-(* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
-(* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
-  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
-  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.\n  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Case for additional constructor *) destruct t; try (subst x); auto.\n  - (* Case for additional constructor *) destruct t; try (subst x); auto.
 Qed.
 
 Theorem term_normalization : forall (t : Terms), Terms.
@@ -51,5 +145,6 @@ Qed.
 (* Additional proofs and lemmas can be added here as needed. *)
                        (H_FVC : forall sv, T (FVC sv))
                        (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)),
+                                 (forall i, T (Vector.nth v i)) -> T (FSC f v))
                                 (forall i, T (Vector.nth v i)) -> T (FSC f v))
                        (t:Terms) : T t.
