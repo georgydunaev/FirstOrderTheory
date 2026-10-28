@@ -7,7 +7,18 @@ def flash_search(query):
     Returns:
         list: A list of results matching the query.
     """
-    # Implement the actual search logic here
-    results = search_database(query)
-    # Example: results = search_database(query)
+    import sqlite3
+
+    # Connect to the database
+    conn = sqlite3.connect('search_database.db')
+    cursor = conn.cursor()
+
+    # Execute the search query
+    cursor.execute("SELECT * FROM terms WHERE term LIKE ?", ('%' + query + '%',))
+
+    # Fetch all results
+    results = cursor.fetchall()
+
+    # Close the connection
+    conn.close()
     return results

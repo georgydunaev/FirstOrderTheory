@@ -16,8 +16,12 @@ Proof.
   induction t1.
   - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
   - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
-  - (* Additional cases as needed for your Terms type *)
-  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto. - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto. - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
   - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
   - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
 Qed.
@@ -27,8 +31,12 @@ Proof.
   induction t1.
   - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
   - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
-  - (* Additional cases as needed for your Terms type *)
-  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto. - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto. - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+(* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+(* Additional cases for term_normalization *) destruct t; try (subst x); auto.
   - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
   - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
 Qed.
