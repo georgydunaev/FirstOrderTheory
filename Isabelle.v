@@ -2,6 +2,7 @@
 1) Maybe http://color.inria.fr/papers/koprowski06draft.pdf ?
 *)
 (* use Isabelle notation in comments *)
+Require Import Coq.Logic.Decidable.
 Inductive Types : Set :=
 | TVar : nat -> Types (* 'a 'b 'c ... *)
 | TImp : Types -> Types -> Types (* "=>" *)
@@ -48,8 +49,17 @@ Inductive PT : Set :=
 Fixpoint PTT (c : PT) : Types :=
 match c with
 | LRA => TImp TProp (TImp TProp TProp)
+| BA => TImp (TImp TProp TProp) TProp
+| TP => TImp TO TI
+| Impl => TImp TO (TImp TO TO)
+| Fora => TImp (TImp TI TO) TO
+| EFalse => TO
+| Econj => TImp TO (TImp TO TO)
+| Edisj => TImp TO (TImp TO TO)
+| Eimp => TImp TO (TImp TO TO)
+end.
 | BA => TImp (TImp TI TProp) TProp
-| TP => TImp TO TProp
+| TP => TImp TO TI
 | Impl => TImp TO (TImp TO TO)
 | Fora => TImp (TImp TI TO) TO
 | EFalse => TO
