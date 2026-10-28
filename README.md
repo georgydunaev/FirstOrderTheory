@@ -48,6 +48,14 @@ opam install coq
 
 ## 3. Usage
 
+To run the tests, use the following command:
+
+```
+make test
+```
+
+This will execute the Python unit tests and ensure that the Coq developments are functioning correctly.
+
 To use the project, you can run the Coq development files using the CoqIDE or the Coq proof assistant. The main development file is `OneFile.v`.
 
 ## 4. Automated Test Suite

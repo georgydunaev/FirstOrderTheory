@@ -24,3 +24,7 @@ all: compile
 test:
 	python3 -m unittest discover -s tests -p 'test_*.py'
 	python3 -m unittest discover -s tests -p 'test_additional.py'
+	python3 -m unittest discover -s tests -p 'test_first_order_logic.py'
+test:
+	python3 -m unittest discover -s tests -p 'test_*.py'
+	python3 -m unittest discover -s tests -p 'test_additional.py'
