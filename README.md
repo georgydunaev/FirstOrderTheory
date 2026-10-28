@@ -287,6 +287,18 @@ FirstOrderTheory/
 
 ## Test Suite
 
+### Hilbert-style Calculus Test Suite
+
+The Hilbert-style calculus in `OneFile.v` has a corresponding test suite in the `tests/test_hilbert_calculus.v` file. The test suite includes:
+
+- Tests for the `Terms_ind` theorem
+- Tests for the `term_substitution` lemma
+- Tests for the `term_equivalence` lemma
+- Tests for the `term_normalization` lemma
+- A test for a specific derivation using the Hilbert-style calculus rules
+
+The test suite is integrated into the main test suite in `tests/main_test_suite.v`.
+
 The project includes a comprehensive test suite to verify the correctness of the implemented theorems and lemmas. The test suite is located in the `tests/` directory and includes the following files:
 
 - `main_test_suite.v`: The main test suite that includes all the test files.

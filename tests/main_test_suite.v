@@ -6,4 +6,7 @@
 (* Include the soundness theorem test file *)
 Require Import test_soundness.
 
+(* Include the Hilbert-style calculus test file *)
+Require Import test_hilbert_calculus.
+
 (* Additional test files can be added here as needed. *)
