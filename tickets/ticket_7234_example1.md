@@ -16,6 +16,18 @@ The example includes:
 ## Status
 
 - [x] Example file created and verified
+- [x] Additional example file created and verified
+
+## Feedback
+
+The example files demonstrate the use of parametric intuitionistic predicate calculus and capture-avoiding substitution effectively. The examples are well-structured and follow the same conventions. The implementation details for the parametric intuitionistic predicate calculus and capture-avoiding substitution should be documented in the source code files for future reference.
+
+## Next Steps
+
+- Create additional examples and exercises to further illustrate the repository's capabilities
+- Document the implementation details for the parametric intuitionistic predicate calculus and capture-avoiding substitution in the source code files
+
+- [x] Example file created and verified
 - [ ] Additional examples and exercises to be added in future iterations
 
 ## Next Steps
