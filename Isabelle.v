@@ -48,8 +48,15 @@ Inductive PT : Set :=
 Fixpoint PTT (c : PT) : Types :=
 match c with
 | LRA => TImp TProp (TImp TProp TProp)
-| BA => TImp (TImp (TVar 0) TProp) TProp
-| TP => TImp TO TI
+| BA => TImp (TImp TI TProp) TProp
+| TP => TImp TO TProp
+| Impl => TImp TO (TImp TO TO)
+| Fora => TImp (TImp TI TO) TO
+| EFalse => TO
+| Econj => TImp TO (TImp TO TO)
+| Edisj => TImp TO (TImp TO TO)
+| Eimp => TImp TO (TImp TO TO)
+
 (*
 | Impl => TImp TO (TImp TO TO)
 | Fora => TImp (TImp TI TO) TO
@@ -173,8 +180,7 @@ end.
 
 (*
 | LRA => TImp TProp (TImp TProp TProp)
-| BA => TImp (TImp (TVar 0) TProp) TProp
-| TP => TImp TO TI
+
 | Impl => TImp TO (TImp TO TO)
 | Fora => TImp (TImp TI TO) TO
 *)
