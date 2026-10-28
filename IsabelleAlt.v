@@ -64,6 +64,7 @@ Inductive WithMP (G : prop -> Type): prop -> Type :=
 
 
 
+(* Aborted proof: This proof was abandoned due to complexity in the proof-relevant natural-deduction/Hilbert model. *)
 Theorem Deduction (P Q:prop) (H : Prf P -> Prf Q)
 :  Prf (Iimpl P Q).
 Proof.
