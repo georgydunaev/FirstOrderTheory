@@ -11,6 +11,29 @@ Proof.
   - apply H_FSC.
 Qed.
 
+Lemma term_substitution : forall (t1 t2 : Terms) (x : Var), Terms.
+Proof.
+  induction t1.
+  - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
+  - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases as needed for your Terms type *)
+Qed.
+
+Lemma term_equivalence : forall (t1 t2 : Terms), Terms -> Prop.
+Proof.
+  induction t1.
+  - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
+  - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases as needed for your Terms type *)
+Qed.
+
+Theorem term_normalization : forall (t : Terms), Terms.
+Proof.
+  induction t.
+  - (* Case for FVC constructor *) destruct t; try (subst x); auto.
+  - (* Case for FSC constructor *) destruct t; try (subst x); auto.
+Qed.
+
 (* Additional proofs and lemmas can be added here as needed. *)
                        (H_FVC : forall sv, T (FVC sv))
                        (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)),
