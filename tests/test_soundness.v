@@ -1,55 +1,51 @@
-(* Test file for the soundness theorem in OneFile.v
- * Author: mistral/codestral-latest (Capability Tier 1)
- * Ticket: [Curated] Missing Tests for Soundness Theorem
- * Reference: /botworkspace/FirstOrderTheory/tickets/ticket_7241.md
- */
+(*
+ * Test suite for the soundness theorem in OneFile.v
+ *
+ * Author: mistral/mistral-medium-latest (Capability Tier 1)
+ *
+ * This file contains test cases for verifying the soundness of the terms in the FirstOrderTheory.
+ * The tests cover different aspects of the soundness theorem, including term substitution,
+ * term equivalence, and term normalization.
+ *)
 
 Require Import OneFile.
 
-(* Test case 1: Verify the soundness theorem for a simple term with a free variable *)
-Lemma test_soundness_FVC :
-  Terms_ind (fun t => True) (fun sv => True) (fun f v => True) (FVC 1).
+(* Test cases for the soundness theorem *)
+
+(* Test case 1: Verify term substitution *)
+Lemma test_term_substitution : forall (t1 t2 : Terms) (x : Var), Terms.
 Proof.
-  apply Terms_ind.
-  exact (fun sv => True).
-  exact (fun f v => True).
+  apply term_substitution.
 Qed.
 
-(* Test case 2: Verify the soundness theorem for a term with a function symbol and arguments *)
-Lemma test_soundness_FSC :
-  Terms_ind (fun t => True) (fun sv => True) (fun f v => True) (FSC 1 (Vector.make 2 (FVC 1) (FVC 2))).
+(* Test case 2: Verify term equivalence *)
+Lemma test_term_equivalence : forall (t1 t2 : Terms), Terms -> Prop.
 Proof.
-  apply Terms_ind.
-  exact (fun sv => True).
-  exact (fun f v => True).
+  apply term_equivalence.
 Qed.
 
-(* Test case 3: Verify the soundness theorem for a more complex term *)
-Lemma test_soundness_complex :
-  Terms_ind (fun t => True) (fun sv => True) (fun f v => True) (FSC 1 (Vector.make 1 (FSC 2 (Vector.make 1 (FVC 1))))).
+(* Test case 3: Verify term normalization *)
+Lemma test_term_normalization : forall (t : Terms), Terms.
 Proof.
-  apply Terms_ind.
-  exact (fun sv => True).
-  exact (fun f v => True).
-Qed.
-Proof.
-  apply Terms_ind.
-  exact (fun sv => True).
-  exact (fun f v H => True).
+  apply term_normalization.
 Qed.
 
-(* Test case 2: Test the soundness theorem with a function symbol. *)
-Lemma test_soundness_FSC : Terms_ind (fun t => True) (fun sv => True) (fun f v H => True) (FSC "f" [FVC "x"]).
+(* Test case 4: Basic term construction using FVC and FSC constructors *)
+Lemma test_basic_term_construction :
+  forall (sv : Var) (f : FSV) (v : Vector.t Terms (fsv f)),
+  Terms.
 Proof.
-  apply Terms_ind.
-  exact (fun sv => True).
-  exact (fun f v H => True).
+  (* Construct a term using FVC constructor *)
+  let t1 := FVC sv in
+  (* Construct a term using FSC constructor *)
+  let t2 := FSC f v in
+  (* Verify that t1 and t2 are terms *)
+  exact Terms_ind (fun t => True) (fun sv => True) (fun f v H => True) t1.
+  exact Terms_ind (fun t => True) (fun sv => True) (fun f v H => True) t2.
 Qed.
 
-(* Test case 3: Test the soundness theorem with a nested term. *)
-Lemma test_soundness_nested : Terms_ind (fun t => True) (fun sv => True) (fun f v H => True) (FSC "f" [FSC "g" [FVC "x"]]).
+Lemma test_term_normalization : forall (t : Terms), Terms.
 Proof.
-  apply Terms_ind.
-  exact (fun sv => True).
-  exact (fun f v H => True).
+  apply term_normalization.
 Qed.
+

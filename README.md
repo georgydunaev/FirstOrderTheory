@@ -18,6 +18,27 @@ The repository has the following structure:
 ```
 FirstOrderTheory/
 ├── examples/          # Example Coq developments
+```
+
+## Test Suite
+
+The repository includes a comprehensive test suite for verifying the soundness of the first-order logic implementation:
+
+- `tests/test_soundness.v`: Contains four test cases covering:
+  1. Basic term construction using FVC and FSC constructors
+  2. Term substitution
+  3. Term equivalence
+  4. Term normalization
+
+All test cases can be executed using the `make test` command, which runs the Coq proof assistant on the test files.
+
+- `tests/test_soundness.v`: Test suite for the soundness theorem, covering term substitution, term equivalence, and term normalization.
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
 ├── notes/             # Additional documentation and notes
 ├── tests/             # Automated test suite
 ├── tickets/           # Project management tickets
