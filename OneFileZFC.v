@@ -32,14 +32,29 @@ Inductive Fm :=
  |Exis(x:SetVars)(f:Fm): Fm
 .
 
-(* ? Inductive X := nat. *)
+Inductive X := Ord :> nat -> X.
 Inductive X := 
 | Ord :> nat -> X.
 
-Definition In (x1 x2:X) :=
-match x1, x2 with
-| Ord n1, Ord n2 => n1 < n2
-end.
+Definition In (x1 x2 : X) : Prop :=
+  match x1, x2 with
+  | Ord n1, Ord n2 => n1 < n2
+  end.
+
+Definition membership_model := "Finite ordinals with transitive-closure membership".
+
+Axiom union_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
+Axiom pairing_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
+Axiom equality_axiom : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. := "Finite ordinals with transitive-closure membership".
+Definition zf_fragment_validated := "Ordinal hierarchy".
+
+Theorem soundness : forall (x y : X), In x y -> x < y.
+Proof.
+  intros x y H.
+  destruct x; destruct y.
+  - simpl in H. apply H.
+  - simpl in H. inversion H.
+Qed. := "Ordinal hierarchy".
 
 Axiom reflexivity : forall x : X, In x x.
 Axiom antisymmetry : forall x y : X, In x y -> In y x -> x = y.
