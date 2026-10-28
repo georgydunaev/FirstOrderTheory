@@ -10,6 +10,7 @@ The test suite is organized as follows:
 tests/
 ├── test_basic.py      # Basic tests for the main components
 ├── test_advanced.py   # Advanced tests for more complex features
+├── test_utils.py      # Tests for utility functions
 └── utils.py         # Utility functions for testing
 ```
 
