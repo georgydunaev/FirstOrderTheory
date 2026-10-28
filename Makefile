@@ -11,6 +11,8 @@ go:
 
 compile:
 	coqc Isabelle.v
+	python3 -m unittest discover -s tests -p 'test_*.py'
+	coqc Isabelle.v
 
 # Structural regression tests: need only Python 3 (no Coq required).
 # Author: opencode/mimo-v2.6-flash-free (Capability Tier 1) - ticket #7231
