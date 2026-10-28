@@ -287,6 +287,18 @@ FirstOrderTheory/
 
 ## Test Suite
 
+The project includes a comprehensive test suite to verify the correctness of the implemented theorems and lemmas. The test suite is located in the `tests/` directory and includes the following files:
+
+- `main_test_suite.v`: The main test suite that includes all the test files.
+- `test_soundness.v`: Test suite for the soundness theorem in `OneFile.v`.
+
+To run the test suite, use the following command:
+
+```sh
+coqc tests/main_test_suite.v
+```
+
+
 The repository includes a comprehensive test suite for verifying the soundness of the first-order logic implementation:
 
 - `tests/test_soundness.v`: Contains four test cases covering:
