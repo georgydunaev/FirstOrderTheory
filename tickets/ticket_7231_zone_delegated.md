@@ -16,6 +16,8 @@ Do whatever useful improvements you want in this repository! Start by exploring 
 ---
 ## ✅ Resolution — Pass 1/5 completed (2026-10-27)
 
+**REOPENED** - No automated test suite present. Manual review required. Please add comprehensive tests and reopen.
+
 **Resolved by**: `opencode/mimo-v2.6-flash-free` (**Capability Tier 1**) — commit `b83d3c2`
 (`docs(#7231): architecture README, structural test suite, lossless parse fixes, follow-up tickets`),
 pushed to local GitLab only (`git push gitlab master`, branch `master`).
