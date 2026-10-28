@@ -17,7 +17,15 @@ Theorem logical_derivation : (forall x, P x -> Q x -> R x) -> (exists x, R x).
 Proof.
   intros H.
   (* Use classical logic to find an x such that R(x) holds *)
-  apply (classical_em (exists x, R x)).
+    destruct (classic (exists x, R x)) as [ex | nex].
+  - exact ex.
+  - destruct nex.
+    apply nex.
+    intros x.
+    apply H.
+    assumption.
+    assumption.
+Qed.
   intros.
   destruct H0 as [x Hx].
   apply exists_intro.
