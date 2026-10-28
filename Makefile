@@ -1,6 +1,13 @@
-all: compile
+all: coq_compile compile
 
 .PHONY: all go test compile
+
+coq_compile:
+	coqc OneFileZFC.v
+	coqc tests/test_predicate_calculus.v
+	coqc tests/test_membership_fragment.v
+	coqc tests/test_isabelle_fol.v
+	coqc tests/test_isabelle_metalogic.v
 
 # go:
 	coqc OneFileZFC.v
