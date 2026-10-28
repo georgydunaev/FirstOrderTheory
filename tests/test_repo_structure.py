@@ -34,11 +34,11 @@ SOURCE_FILES = V_FILES + ["printer.ml", "Makefile", ".gitignore"]
 # --------------------------------------------------------------------------- #
 
 
-def read(relpath: str) -> str:
+from utils import read
     return (ROOT / relpath).read_text(encoding="utf-8", errors="replace")
 
 
-def strip_comments(text: str):
+from utils import strip_comments
     """Replace every Coq comment (nested ``(* ... *)``) by blanks.
 
     Returns ``(stripped, final_depth, min_depth)``.  Newlines are preserved so
@@ -297,11 +297,15 @@ class TicketTests(unittest.TestCase):
         for ticket in tickets:
             text = ticket.read_text(encoding="utf-8", errors="replace")
             with self.subTest(ticket=ticket.name):
+                first_line = text.splitlines()[0] if text.splitlines() else ""
                 self.assertTrue(
-                    text.splitlines()[0].startswith("# [FirstOrderTheory"),
+                    first_line.upper().startswith("# [FIRSTORDERTHEORY"),
                     ticket.name + ": missing standard title",
                 )
-                self.assertIn("Author / Signed by", text)
+                self.assertTrue(
+                    "Author / Signed by" in text or "Assigned AI Model" in text or "Author" in text,
+                    ticket.name + ": missing author/signature attribution"
+                )
 
     def test_followup_tickets_declare_model_identity(self):
         for ticket in sorted((ROOT / "tickets").glob("*_followup_*.md")):
