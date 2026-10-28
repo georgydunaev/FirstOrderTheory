@@ -3,7 +3,9 @@ import unittest
 class TestAdvanced(unittest.TestCase):
     def test_terms_ind(self):
         # Test the Terms_ind theorem
-        from FirstOrderTheory import Terms_ind
+        import sys
+sys.path.append('/botworkspace/FirstOrderTheory')
+from FirstOrderTheory import Terms_ind
 
         # Test Terms_ind with a free variable
         sv = "x"
