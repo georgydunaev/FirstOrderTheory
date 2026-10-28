@@ -1,15 +1,15 @@
-all: compile test
+all: test
 
 .PHONY: all go test compile
 
-go:
+# go:
 	coqc Isabelle.v
 	ocamlc -i printer.ml
 	ocamlc -c prog.mli
 	ocamlc -o a.out prog.ml printer.ml
 	./a.out
 
-compile:
+# compile:
 	coqc Isabelle.v
 	python3 -m unittest discover -s tests -p 'test_*.py'
 	coqc Isabelle.v
