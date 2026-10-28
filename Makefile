@@ -9,6 +9,7 @@ coq_compile: coq_compile
 	./a.out
 
 # compile:
+	python3 verify.py
 	coqc OneFileZFC.v
 	coqc tests/test_predicate_calculus.v
 	coqc tests/test_membership_fragment.v
@@ -17,19 +18,22 @@ coq_compile: coq_compile
 	coqc tests/test_additional_soundness.v
 
 # go:
+	python3 -m unittest discover -s tests -p 'test_*.py'
 	coqc OneFileZFC.v
 	ocamlc -i printer.ml
 	ocamlc -c prog.mli
 	ocamlc -o a.out prog.ml printer.ml
 	./a.out
 
-# compile: coq_compile
+# compile:
+	python3 verify.py coq_compile
 	ocamlc -i printer.ml
 	ocamlc -c prog.mli
 	ocamlc -o a.out prog.ml printer.ml
 	./a.out
 
 # compile:
+	python3 verify.py
 	coqc tests/test_predicate_calculus.v
 	coqc tests/test_membership_fragment.v
 	coqc tests/test_isabelle_fol.v
