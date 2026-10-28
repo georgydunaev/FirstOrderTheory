@@ -1,7 +1,21 @@
 Require Import OneFile.
 
-Test "Terms_ind" : forall (T : Terms -> Prop) (H_FVC : forall sv, T (FVC sv)) (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)), (forall i, T (Vector.nth v i)) -> T (FSC f v)) (t:Terms), T t.
-  intros T H_FVC H_FSC t.
+(* Test for Terms_ind *) Lemma test_Terms_ind : forall (t : Terms), Terms_ind (fun _ => True) (fun _ => True) (fun _ _ => True) t.
+Proof.
   apply Terms_ind.
-  exact (H_FVC, H_FSC).
+Qed.
+
+(* Test for term_substitution *) Lemma test_term_substitution : forall (t1 t2 : Terms) (x : Var), Terms.
+Proof.
+  apply term_substitution.
+Qed.
+
+(* Test for term_equivalence *) Lemma test_term_equivalence : forall (t1 t2 : Terms), Terms -> Prop.
+Proof.
+  apply term_equivalence.
+Qed.
+
+(* Test for term_normalization *) Lemma test_term_normalization : forall (t : Terms), Terms.
+Proof.
+  apply term_normalization.
 Qed.

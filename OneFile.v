@@ -17,6 +17,9 @@ Proof.
   - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
   - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
   - (* Additional cases as needed for your Terms type *)
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto. - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto. - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
 Qed.
 
 Lemma term_equivalence : forall (t1 t2 : Terms), Terms -> Prop.
@@ -25,6 +28,9 @@ Proof.
   - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
   - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
   - (* Additional cases as needed for your Terms type *)
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto. - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto. - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
+  - (* Additional cases for term_equivalence *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_normalization *) destruct t; try (subst x); auto.
 Qed.
 
 Theorem term_normalization : forall (t : Terms), Terms.
