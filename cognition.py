@@ -1,24 +1,16 @@
-def flash_search(query):
-    """Perform a search operation based on the given query.
+class Terms:
+    pass
 
-    Args:
-        query (str): The search query.
+def FVC(sv):
+    return {'type': 'FVC', 'value': sv}
 
-    Returns:
-        list: A list of results matching the query.
-    """
-    import sqlite3
+def FSC(f, v):
+    return {'type': 'FSC', 'function': f, 'args': v}
 
-    # Connect to the database
-    conn = sqlite3.connect('search_database.db')
-    cursor = conn.cursor()
-
-    # Execute the search query
-    cursor.execute("SELECT * FROM terms WHERE term LIKE ?", ('%' + query + '%',))
-
-    # Fetch all results
-    results = cursor.fetchall()
-
-    # Close the connection
-    conn.close()
-    return results
+def term_substitution(t1, t2, x):
+    if t1['type'] == 'FVC' and t1['value'] == x:
+        return t2
+    elif t1['type'] == 'FSC':
+        return FSC(t1['function'], [term_substitution(arg, t2, x) for arg in t1['args']])
+    else:
+        return t1

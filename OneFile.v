@@ -18,6 +18,12 @@ Proof.
   - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
 Qed.
 Proof.
+  induction t1 as [| [f v IHv]].
+  - (* Case for FVC constructor *) destruct t1; try (subst x); auto.
+  - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
+  - (* Additional cases for term_substitution *) destruct t1; try (subst x); auto.
+Qed.
+Proof.
   induction t1.
   - (* Case for FVC constructor *) destruct t1; try (subst x); auto.\n  - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
   - (* Case for FSC constructor *) destruct t1; try (subst x); auto.
