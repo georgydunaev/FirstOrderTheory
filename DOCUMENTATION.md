@@ -59,6 +59,21 @@ Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md`
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
+## Examples
+
+The repository includes several examples demonstrating the use of the first-order logic framework:
+
+1. **Traffic Light Example**: A simple traffic light system modeled using the first-order logic. See `examples/traffic_light_example.v` and `notes/traffic_light_tutorial.md` for details.
+
+## Tutorials
+
+In addition to the examples, the repository provides tutorials to help users understand and apply the framework:
+
+1. **Traffic Light Tutorial**: A step-by-step guide to modeling a traffic light system using the first-order logic. See `notes/traffic_light_tutorial.md` for details.
+
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
 The repository has the following structure:
 
 ```
