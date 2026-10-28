@@ -53,6 +53,15 @@ make test
 
 ## Contributing
 
+Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md` file for more information on how to contribute to the project.
+
+The `Makefile` includes the following targets:
+
+- `all`: Compiles the project and runs tests.
+- `compile`: Compiles the Coq files.
+- `test`: Runs the Python tests.
+- `go`: Compiles and runs the OCaml program.
+
 Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md` file.
 
 ## License
