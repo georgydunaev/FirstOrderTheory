@@ -3,6 +3,10 @@
 **Description**: The Hilbert-style calculus in `OneFile.v` does not have corresponding test cases in the test suite.
 
 **Acceptance Criteria**:
+- [ ] Comprehensive test suite created in the `tests/` directory
+- [ ] At least 5 test cases covering different rules and derivations
+- [ ] Tests integrated into the main test suite
+- [ ] Test suite documented in the `README.md` file
 - [ ] Test file created for the Hilbert-style calculus
 - [ ] At least 5 test cases covering different rules and derivations
 - [ ] Tests integrated into the main test suite
