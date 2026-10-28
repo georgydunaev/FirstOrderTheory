@@ -8,7 +8,7 @@ sys.path.append('/botworkspace/FirstOrderTheory')
 from FirstOrderTheory import Terms_ind
 
         # Test Terms_ind with a free variable
-        sv = "x"
+                sv = "x"
         self.assertTrue(Terms_ind(lambda t: t == FVC(sv), lambda sv: True, lambda f, v: True, FVC(sv)))
 
         # Test Terms_ind with a function symbol
