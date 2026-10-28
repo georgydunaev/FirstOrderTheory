@@ -7,4 +7,10 @@ Develop a comprehensive test suite for the project to ensure the correctness and
 Medium
 
 ## Assignee
+
+Georgy Dunaev
+
+## Status
+
+Reopened: Manual review required to ensure code quality and adherence to repository invariants.
 Georgy Dunaev
