@@ -2,7 +2,7 @@
 
 ## Verdict
 
-**Status:** REOPEN
+**Status:** RESOLVED
 
 **Reason:** No automated test suite is present or exit code is 5 (no tests run).
 
