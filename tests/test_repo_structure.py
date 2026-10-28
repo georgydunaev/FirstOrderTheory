@@ -37,7 +37,7 @@ SOURCE_FILES = V_FILES + ["printer.ml", "Makefile", ".gitignore"]
 # --------------------------------------------------------------------------- #
 
 
-from utils import read
+from .utils import read
 def read(relpath):
     return (ROOT / relpath).read_text(encoding="utf-8", errors="replace")
 
