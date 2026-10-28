@@ -33,11 +33,11 @@ Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Blacklist.
  |Exis(x:SetVars)(f:Fm): Fm
 .
 
-(* X represents ordinals. *)Inductive X := Ord :> nat -> X.
-(* X represents ordinals. *)Inductive X := 
+(* X represents finite ordinals with transitive-closure membership. *)Inductive X := Ord :> nat -> X.
 | Ord :> nat -> X.
 
-(* In represents the membership relation between two ordinals. *)Definition In (x1 x2 : X) : Prop :=
+(* In represents the membership relation between two ordinals using transitive-closure. *)
+Definition In (x1 x2 : X) : Prop :=
   match x1, x2 with
   | Ord n1, Ord n2 => n1 < n2
   end.
