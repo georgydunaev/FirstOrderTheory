@@ -11,17 +11,15 @@ Inductive SetVars :=
 
 Inductive Terms : Type :=
 | FVC :> SetVars -> Terms
-(*
-| fsunion :Terms -> Terms
+
+| fsunion : Terms -> Terms
 | fspair : Terms -> Terms -> Terms
-*)
 .
 
 Inductive AtomFm : Type :=
 | IN : Terms -> Terms -> AtomFm
-(*
+
 | EQ : Terms -> Terms -> AtomFm
-*)
 .
 
 Inductive Fm :=
@@ -36,11 +34,19 @@ Inductive Fm :=
 
 (* ? Inductive X := nat. *)
 Inductive X := 
-| Se :> nat -> X.
+| Ord :> nat -> X.
 
-Definition In (x1 x2:X) := 
+Definition In (x1 x2:X) :=
 match x1, x2 with
-| Se n1, Se n2 => n1 < n2
+| Ord n1, Ord n2 => n1 < n2
+end.
+
+Axiom reflexivity : forall x : X, In x x.
+Axiom antisymmetry : forall x y : X, In x y -> In y x -> x = y.
+Axiom transitivity : forall x y z : X, In x y -> In y z -> In x z.
+Axiom extensionality : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. 
+match x1, x2 with
+| Ord n1, Ord n2 => n1 < n2
 end.
 
 Definition SetVars_eqb r xi :=
@@ -68,7 +74,7 @@ Fixpoint teI
    (val:SetVars->X) (t:Terms): X :=
    match t with
    | FVC s => val s
-   (*| FSC f t0 => fsI f (Vector.map (teI val) t0)*)
+   | FSC f t0 => fsI f (Vector.map (teI val) t0))
    end.
 
 

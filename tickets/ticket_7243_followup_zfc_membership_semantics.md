@@ -16,6 +16,10 @@ trailing preserved comment).
 
 **Proposed work (in increasing order of ambition):**
 
+**Feedback:**
+- No automated tests available. Manual review required to ensure adherence to constraints and requirements.
+- The ticket has been reopened for further review and potential adjustments.
+
 - [ ] Replace the `<`-on-`nat` carrier with an honest structure — e.g. finite ordinals with
       transitive-closure membership (`n ∈ m := n < m` is already fine *as a model of the
       ordinal hierarchy*, but say so) or a Kripke-style stage model — and state exactly which
