@@ -1,9 +1,14 @@
-*.mli
-*.pdf
-*.cmi
-*.cmo
-a.out
+# Generated OCaml files
 prog.ml
 prog.mli
-__pycache__/
-*.pyc
+a.out
+
+# Build artifacts
+*.aux
+*.vo
+*.vok
+*.glob
+*.vos
+
+# Test artifacts
+test_results/

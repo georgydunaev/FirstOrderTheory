@@ -5,7 +5,7 @@ Require Import Coq.Lists.List.
 Require Import Coq.Vectors.Vector.
 Require Import Coq.Structures.Equalities.
 Require Coq.extraction.Extraction.
-Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Blacklist.
+Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Library "prog.ml". PREPR. Extraction Blacklist.
 
 (* SetVars represents set variables. *)Inductive SetVars :=
 | Va : nat -> SetVars.
@@ -257,7 +257,7 @@ End PREPR.
 
 Extraction Language OCaml.
 
-Extraction "prog.ml" "prog.mli" PREPR. Extraction Blacklist "prog.mli". Extraction Blacklist "prog.mli".
+Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Library "prog.ml". "prog.mli" PREPR. Extraction Blacklist "prog.mli". Extraction Blacklist "prog.mli".
 
 
 (* ---------- END ---------- *)
