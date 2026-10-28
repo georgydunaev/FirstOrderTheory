@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../.agents/skills/hierarchical-cognition/scripts')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from cognition import flash_search
 

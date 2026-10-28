@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 """Structural regression tests for the FirstOrderTheory repository.
 
 These tests intentionally require **no Coq installation**: they mechanically
@@ -35,6 +38,7 @@ SOURCE_FILES = V_FILES + ["printer.ml", "Makefile", ".gitignore"]
 
 
 from utils import read
+def read(relpath):
     return (ROOT / relpath).read_text(encoding="utf-8", errors="replace")
 
 

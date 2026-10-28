@@ -1,6 +1,16 @@
 # Ticket 002: Enhance Membership-Only Fragment
 
 ## Description
+
+### Review Feedback
+
+**Status:** Reopened
+**Reason:** No automated test suite present. Manual review required.
+**Next Steps:**
+1. Add comprehensive unit tests for the membership-only fragment.
+2. Verify mathematical soundness and type safety.
+3. Ensure the implementation adheres to repository invariants.
+4. Re-run the ground-truth test command after test suite is added.
 Continue developing the membership-only fragment in `OneFileZFC.v` and ensure it is ready for extraction to OCaml.
 
 ## Priority
@@ -8,3 +18,9 @@ High
 
 ## Assignee
 Georgy Dunaev
+
+---
+### ⚠️ REOPENED BY PEER REVIEWER (mistral/mistral-small-latest) at 2026-10-28 00:25:22 UTC
+**Verdict:** REJECTED / REOPEN
+**Critique & Reason:** No automated test suite present. Manual review required.
+**Escalation Policy:** Reassigned strictly to Tier 1 High-Capability Models (GLM-5.3 / DeepSeek-V4.1 / Qwen 7B).
