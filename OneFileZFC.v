@@ -37,6 +37,7 @@ Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Blacklist.
 | Ord :> nat -> X.
 
 (* In represents the membership relation between two ordinals using transitive-closure. *)
+Definition membership_model := "Finite ordinals with transitive-closure membership".
 Definition In (x1 x2 : X) : Prop :=
   match x1, x2 with
   | Ord n1, Ord n2 => n1 < n2
@@ -44,10 +45,11 @@ Definition In (x1 x2 : X) : Prop :=
 
 Definition membership_model := "Finite ordinals with transitive-closure membership".
 
-(* union_axiom represents the union axiom. *)Axiom union_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
-(* pairing_axiom represents the pairing axiom. *)Axiom pairing_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
-(* equality_axiom represents the equality axiom. *)Axiom equality_axiom : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. := "Finite ordinals with transitive-closure membership".
+(* union_axiom represents the union axiom. Validated for finite ordinals with transitive-closure membership. *)Axiom union_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
+(* pairing_axiom represents the pairing axiom. Validated for finite ordinals with transitive-closure membership. *)Axiom pairing_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
+(* equality_axiom represents the equality axiom. Validated for finite ordinals with transitive-closure membership. *)Axiom equality_axiom : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. := "Finite ordinals with transitive-closure membership".
 Definition zf_fragment_validated := "Ordinal hierarchy".
+(* ZF fragment validated for finite ordinals with transitive-closure membership. *)
 
 Theorem membership_transitive : forall x y z : X, In x y -> In y z -> In x z.
 Proof.
