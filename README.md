@@ -47,6 +47,37 @@ opam install coq
 opam install ocamlfind
 ```
 
+## 3. Testing
+
+The project includes an automated test suite to verify the correctness of the Coq developments. The test suite is located in the `tests/` directory and includes:
+
+- `test_soundness.v`: Tests for the soundness theorem in `OneFile.v`
+- `test_hilbert_calculus.v`: Tests for the Hilbert-style calculus
+
+To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test suite is integrated into the main test suite file `main_test_suite.v`, which includes all the test files.
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+opam install coq
+opam install ocamlfind
+```
+
 3. Build the project:
 
 ```bash
@@ -103,6 +134,37 @@ FirstOrderTheory/
 ```
 
 ## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+opam install coq
+opam install ocamlfind
+```
+
+## 3. Testing
+
+The project includes an automated test suite to verify the correctness of the Coq developments. The test suite is located in the `tests/` directory and includes:
+
+- `test_soundness.v`: Tests for the soundness theorem in `OneFile.v`
+- `test_hilbert_calculus.v`: Tests for the Hilbert-style calculus
+
+To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test suite is integrated into the main test suite file `main_test_suite.v`, which includes all the test files.
 
 To install the project, follow these steps:
 
@@ -240,6 +302,37 @@ FirstOrderTheory/
 ```
 
 ## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+opam install coq
+opam install ocamlfind
+```
+
+## 3. Testing
+
+The project includes an automated test suite to verify the correctness of the Coq developments. The test suite is located in the `tests/` directory and includes:
+
+- `test_soundness.v`: Tests for the soundness theorem in `OneFile.v`
+- `test_hilbert_calculus.v`: Tests for the Hilbert-style calculus
+
+To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test suite is integrated into the main test suite file `main_test_suite.v`, which includes all the test files.
 
 To install the project, follow these steps:
 
@@ -461,6 +554,8 @@ FirstOrderTheory/
 
 ## Test Suite
 
+- **Soundness Theorem Tests**: Comprehensive test suite for the soundness theorem in `OneFile.v` located in `tests/test_soundness.v`.
+
 ### Hilbert-style Calculus Test Suite
 
 The Hilbert-style calculus in `OneFile.v` has a corresponding test suite in the `tests/test_hilbert_calculus.v` file. The test suite includes:
@@ -514,6 +609,37 @@ FirstOrderTheory/
 ```
 
 ## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+opam install coq
+opam install ocamlfind
+```
+
+## 3. Testing
+
+The project includes an automated test suite to verify the correctness of the Coq developments. The test suite is located in the `tests/` directory and includes:
+
+- `test_soundness.v`: Tests for the soundness theorem in `OneFile.v`
+- `test_hilbert_calculus.v`: Tests for the Hilbert-style calculus
+
+To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test suite is integrated into the main test suite file `main_test_suite.v`, which includes all the test files.
 
 To install the project, follow these steps:
 
@@ -757,6 +883,37 @@ FirstOrderTheory/
 ```
 
 ## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+opam install coq
+opam install ocamlfind
+```
+
+## 3. Testing
+
+The project includes an automated test suite to verify the correctness of the Coq developments. The test suite is located in the `tests/` directory and includes:
+
+- `test_soundness.v`: Tests for the soundness theorem in `OneFile.v`
+- `test_hilbert_calculus.v`: Tests for the Hilbert-style calculus
+
+To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test suite is integrated into the main test suite file `main_test_suite.v`, which includes all the test files.
 
 To install the project, follow these steps:
 

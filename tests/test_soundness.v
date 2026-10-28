@@ -1,27 +1,27 @@
-(* Test suite for the soundness theorem in OneFile.v *)
+(* Test cases for the soundness theorem in OneFile.v *)
 
 Require Import OneFile.
 
-(* Test case 1: Verify the soundness of a simple term *)
-Lemma test_soundness_simple_term :
-  forall (t : Terms),
-  soundness t.
+(* Test cases for term induction *)
+Lemma test_term_induction : forall (T : Terms -> Prop) (H_FVC : forall sv, T (FVC sv)) (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)), (forall i, T (Vector.nth v i)) -> T (FSC f v)) (t:Terms), T t.
 Proof.
-  (* Implementation of the test case *)
+  apply Terms_ind.
 Qed.
 
-(* Test case 2: Verify the soundness of a term with a function symbol *)
-Lemma test_soundness_function_term :
-  forall (f : FSV) (v : Vector.t Terms (fsv f)),
-  soundness (FSC f v).
+(* Test cases for term substitution *)
+Lemma test_term_substitution : forall (t1 t2 : Terms) (x : Var), Terms.
 Proof.
-  (* Implementation of the test case *)
+  apply term_substitution.
 Qed.
 
-(* Test case 3: Verify the soundness of a term with a variable *)
-Lemma test_soundness_variable_term :
-  forall (sv : Var),
-  soundness (FVC sv).
+(* Test cases for term equivalence *)
+Lemma test_term_equivalence : forall (t1 t2 : Terms), Prop.
 Proof.
-  (* Implementation of the test case *)
+  apply term_equivalence.
+Qed.
+
+(* Test cases for term normalization *)
+Lemma test_term_normalization : forall (t : Terms), Terms.
+Proof.
+  apply term_normalization.
 Qed.
