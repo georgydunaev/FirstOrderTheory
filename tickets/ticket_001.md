@@ -2,6 +2,8 @@
 
 ## Description
 
+The `Isabelle.v` file cannot be compiled due to the absence of the `make` command. The `Makefile` is not properly set up, and the environment does not have the necessary tools to compile the Coq files. This ticket has been reopened due to the lack of automated tests and the need for manual verification of the compilation issues.
+
 The `Isabelle.v` file cannot be compiled due to the absence of the `make` command. The `Makefile` is not properly set up, and the environment does not have the necessary tools to compile the Coq files.
 
 ## Steps to Reproduce
