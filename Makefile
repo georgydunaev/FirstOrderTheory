@@ -10,6 +10,10 @@ all: compile
 	./a.out
 
 # compile:
+	coqc tests/test_predicate_calculus.v
+	coqc tests/test_membership_fragment.v
+	coqc tests/test_isabelle_fol.v
+	coqc tests/test_isabelle_metalogic.v
 	echo 'Coq compiler not found'
 	python3 -m unittest discover -s tests -p 'test_*.py'
 	echo 'Coq compiler not found'
