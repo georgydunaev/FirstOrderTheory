@@ -1,5 +1,42 @@
 # FirstOrderTheory Documentation
 
+## Overview
+
+FirstOrderTheory is a Coq development of intuitionistic first-order logic in Hilbert style. The project includes a machine-checked relative soundness theorem and a membership-only fragment that extracts to OCaml. Additionally, there are three experimental encodings of Isabelle's FOL/HOL libraries.
+
+## Repository Structure
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
+├── notes/             # Additional documentation and notes
+├── tests/             # Automated test suite
+├── tickets/           # Tickets for tracking issues and feature requests
+├── main.py            # Main module for the project
+├── README.md          # Project documentation
+```
+
+## Test Suite
+
+The repository includes a comprehensive test suite for verifying the soundness of the first-order logic implementation:
+
+- `tests/test_soundness.v`: Contains four test cases covering:
+  1. Basic term construction using FVC and FSC constructors
+  2. Term substitution
+  3. Term equivalence
+  4. Term normalization
+
+All test cases can be executed using the `make test` command, which runs the Coq proof assistant on the test files.
+
+## Main Components
+
+### FirstOrderTheory Class
+
+The `FirstOrderTheory` class is the main component of the project. Currently, it is a placeholder with no implemented methods or attributes. Future development will focus on implementing the first-order logic in Hilbert style and the machine-checked soundness theorem.
+
+
 ## Project Overview
 
 FirstOrderTheory is a Coq development of intuitionistic first-order logic in Hilbert style. It includes a machine-checked relative soundness theorem and a membership-only fragment that extracts to OCaml. There are also experimental encodings of Isabelle's FOL/HOL libraries.
