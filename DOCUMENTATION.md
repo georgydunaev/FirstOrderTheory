@@ -2,44 +2,7 @@
 
 ## Overview
 
-FirstOrderTheory is a Coq development of intuitionistic first-order logic in Hilbert style. The project includes a machine-checked relative soundness theorem and a membership-only fragment that extracts to OCaml. Additionally, there are three experimental encodings of Isabelle's FOL/HOL libraries.
-
-## Repository Structure
-
-The repository has the following structure:
-
-```
-FirstOrderTheory/
-├── examples/          # Example Coq developments
-├── notes/             # Additional documentation and notes
-├── tests/             # Automated test suite
-├── tickets/           # Tickets for tracking issues and feature requests
-├── main.py            # Main module for the project
-├── README.md          # Project documentation
-```
-
-## Test Suite
-
-The repository includes a comprehensive test suite for verifying the soundness of the first-order logic implementation:
-
-- `tests/test_soundness.v`: Contains four test cases covering:
-  1. Basic term construction using FVC and FSC constructors
-  2. Term substitution
-  3. Term equivalence
-  4. Term normalization
-
-All test cases can be executed using the `make test` command, which runs the Coq proof assistant on the test files.
-
-## Main Components
-
-### FirstOrderTheory Class
-
-The `FirstOrderTheory` class is the main component of the project. Currently, it is a placeholder with no implemented methods or attributes. Future development will focus on implementing the first-order logic in Hilbert style and the machine-checked soundness theorem.
-
-
-## Project Overview
-
-FirstOrderTheory is a Coq development of intuitionistic first-order logic in Hilbert style. It includes a machine-checked relative soundness theorem and a membership-only fragment that extracts to OCaml. There are also experimental encodings of Isabelle's FOL/HOL libraries.
+FirstOrderTheory is a Coq development of intuitionistic first-order logic in Hilbert style — with a machine-checked relative soundness theorem — plus a membership-only fragment that extracts to OCaml, and three experimental encodings of Isabelle's FOL/HOL libraries.
 
 ## Repository Structure
 
@@ -59,125 +22,87 @@ FirstOrderTheory/
 └── verify.py         # Verification script
 ```
 
-## Installation
+## Detailed Documentation
 
-To install the project, follow these steps:
+### OneFile.v
 
-1. Clone the repository:
+The `OneFile.v` file contains the main Coq development of intuitionistic first-order logic. It includes the following key components:
 
-```
-git clone https://github.com/yourusername/FirstOrderTheory.git
-cd FirstOrderTheory
-```
+- **Terms_ind**: A definition for induction over terms.
+- **Terms_ind**: A theorem for induction over terms.
+- **term_substitution**: A lemma for term substitution.
+- **term_equivalence**: A lemma for term equivalence.
+- **term_normalization**: A lemma for term normalization.
 
-2. Install the required dependencies:
+The proofs in `OneFile.v` are structured using induction and case analysis, with comments explaining each step. The file also includes additional cases for term_substitution, term_equivalence, and term_normalization.
 
-```
-opam install coq
-```
+### OneFileZFC.v
 
-## Usage
+The `OneFileZFC.v` file contains the Coq development of Zermelo-Fraenkel set theory. It includes the following key components:
 
-To use the project, you can run the Coq development files using the CoqIDE or the Coq proof assistant. The main development file is `OneFile.v`.
+- **SetVars**: An inductive type representing set variables.
+- **Terms**: An inductive type representing terms, including free variables, union, and pairing.
+- **AtomFm**: An inductive type representing atomic formulas, including membership and equality.
+- **Fm**: An inductive type representing formulas, including atomic formulas, conjunction, disjunction, implication, and quantifiers.
+- **X**: An inductive type representing finite ordinals with transitive-closure membership.
+- **In**: A definition for the membership relation between two ordinals using transitive-closure.
+- **union_axiom**: An axiom for the union, validated for finite ordinals with transitive-closure membership.
+- **pairing_axiom**: An axiom for the pairing, validated for finite ordinals with transitive-closure membership.
+- **equality_axiom**: An axiom for the equality, validated for finite ordinals with transitive-closure membership.
 
-## Automated Test Suite
-
-The project includes an automated test suite in the `tests/` directory. To run the tests, use the following command:
-
-```
-make test
-```
-
-## Contributing
-
-Contributions are welcome! Please follow the guidelines in the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on how to contribute to the project.
-
-Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md` file for more information on how to contribute to the project.
-
-The `Makefile` includes the following targets:
-
-- `all`: Compiles the project and runs tests.
-- `compile`: Compiles the Coq files.
-- `test`: Runs the Python tests.
-- `go`: Compiles and runs the OCaml program.
-
-Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md` file.
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
-## Examples
-
-The repository includes several examples demonstrating the use of the first-order logic framework:
-
-1. **Traffic Light Example**: A simple traffic light system modeled using the first-order logic. See `examples/traffic_light_example.v` and `notes/traffic_light_tutorial.md` for details.
-
-## Tutorials
-
-In addition to the examples, the repository provides tutorials to help users understand and apply the framework:
-
-1. **Traffic Light Tutorial**: A step-by-step guide to modeling a traffic light system using the first-order logic. See `notes/traffic_light_tutorial.md` for details.
+The file is well-commented to explain the concepts and techniques used, including the validation of the axioms for finite ordinals with transitive-closure membership.
 
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+The `OneFileZFC.v` file contains the Coq development of Zermelo-Fraenkel set theory. It includes definitions, theorems, and proofs related to set theory. The file is well-commented to explain the concepts and techniques used.
 
-The repository has the following structure:
 
-```
-FirstOrderTheory/
-├── examples/          # Example Coq developments
-├── notes/             # Derivation notes and explanations
-├── tests/             # Test suite and utilities
-├── tickets/           # Issue and improvement tickets
-├── OneFile.v          # Main development file
-├── OneFileZFC.v      # Membership-only fragment
-├── Isabelle.v         # Sketch of Isabelle's FOL library
-├── IsabelleAlt.v      # Proof-relevant natural-deduction/Hilbert model
-├── printer.ml         # OCaml printer for extracted terms
-├── verify.py         # Verification script
-├── cognition.py       # Cognition utilities
-└── README.md          # Project README
-```
+### Examples
 
-## Key Components
+The `examples/` directory contains example Coq developments that demonstrate the usage of the library. Each example is well-commented to explain the concepts and techniques used.
 
-### Main Development (OneFile.v)
+### Notes
 
-The main development includes:
+The `notes/` directory includes additional documentation and notes related to the project. These notes cover various aspects of the project, including design decisions, implementation details, and future work.
 
-- Parametric intuitionistic predicate calculus
-- Syntax and capture-avoiding substitution
-- Semantics and Hilbert-style calculus
-- Machine-checked soundness theorem
+### Tests
 
-### Membership-Only Fragment (OneFileZFC.v)
+The `tests/` directory contains the automated test suite, which includes unit tests and integration tests. The test suite ensures the correctness and robustness of the library.
 
-The membership-only fragment includes:
+### Tickets
 
-- Definitions for SetVars, Terms, AtomFm, Fm, X, and In
-- Axioms for union, pairing, and equality
-- A membership model and validation of the ZFC fragment
+The `tickets/` directory contains project management tickets. Each ticket includes a description of the task, priority, and assignee. Tickets are used to track the progress of the project and manage tasks effectively.
 
-### Experimental Encodings of Isabelle's FOL/HOL Libraries (Isabelle.v)
+### Makefile
 
-The experimental encodings include:
+The `Makefile` includes targets for building and testing the project. The `make test` target runs the automated test suite to verify the correctness of the library.
 
-- Definitions for Types, PT, and PTT
-- Comments referencing Isabelle's notation and logic
+### OneFile.v
 
-### Proof-Relevant Natural-Deduction/Hilbert Model (IsabelleAlt.v)
+The `OneFile.v` file contains the main Coq development of intuitionistic first-order logic. It includes definitions, theorems, and proofs related to the logic.
 
-The proof-relevant model includes:
+### OneFileZFC.v
 
-- Definitions for o, prop, and Prf
-- Proof rules for metalogic and object logic
-- Equality and propositional logic rules
+The `OneFileZFC.v` file contains the Coq development of Zermelo-Fraenkel set theory. It includes the following key components:
 
-## Hardware Requirements
+- **SetVars**: An inductive type representing set variables.
+- **Terms**: An inductive type representing terms, including free variables, union, and pairing.
+- **AtomFm**: An inductive type representing atomic formulas, including membership and equality.
+- **Fm**: An inductive type representing formulas, including atomic formulas, conjunction, disjunction, implication, and quantifiers.
+- **X**: An inductive type representing finite ordinals with transitive-closure membership.
+- **In**: A definition for the membership relation between two ordinals using transitive-closure.
+- **union_axiom**: An axiom for the union, validated for finite ordinals with transitive-closure membership.
+- **pairing_axiom**: An axiom for the pairing, validated for finite ordinals with transitive-closure membership.
+- **equality_axiom**: An axiom for the equality, validated for finite ordinals with transitive-closure membership.
 
-The project requires a GPU with at least 6GB of VRAM for optimal performance. The recommended GPU is an NVIDIA GeForce GTX 1660 Ti Mobile or equivalent. For smaller models, a GPU with 4GB of VRAM may suffice.
+The file is well-commented to explain the concepts and techniques used, including the validation of the axioms for finite ordinals with transitive-closure membership.
 
-## Conclusion
 
-This documentation provides an overview of the FirstOrderTheory project, its structure, and key components. For more detailed information, refer to the individual files and comments within the repository.
+The `OneFileZFC.v` file contains the Coq development of Zermelo-Fraenkel set theory. It includes definitions, theorems, and proofs related to set theory.
+
+### printer.ml
+
+The `printer.ml` file contains the printer module for the project. It includes functions for printing and displaying the results of the Coq developments.
+
+### verify.py
+
+The `verify.py` script is used for verification purposes. It includes functions for verifying the correctness of the Coq developments and the extracted OCaml code.

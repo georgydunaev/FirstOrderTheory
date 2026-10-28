@@ -29,6 +29,39 @@ FirstOrderTheory/
 └── verify.py         # Verification script
 ```
 
+The `examples/` directory contains example Coq developments that demonstrate the usage of the library. The `notes/` directory includes additional documentation and notes related to the project. The `tests/` directory will contain the automated test suite, which will include unit tests and integration tests. The `tickets/` directory contains project management tickets, including this one.
+
+## 2. Mathematical Contents
+
+The repository contains a Coq development of intuitionistic first-order logic in Hilbert style. The development includes a relative soundness theorem and a membership-only fragment that extracts to OCaml. Additionally, there are three experimental encodings of Isabelle's FOL/HOL libraries.
+
+## 3. Software Structure
+
+The software structure of the repository is as follows:
+
+- `OneFile.v`: The main Coq development file that contains the intuitionistic first-order logic in Hilbert style.
+- `OneFileZFC.v`: A Coq development of Zermelo-Fraenkel set theory.
+- `printer.ml`: The printer module for the project.
+- `verify.py`: The verification script for the project.
+
+The repository also includes a `Makefile` for building and testing the project, and a `DOCUMENTATION.md` file for detailed project documentation.
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
+├── notes/             # Additional documentation and notes
+├── tests/             # Automated test suite
+├── tickets/           # Project management tickets
+├── DOCUMENTATION.md   # Detailed project documentation
+├── Makefile           # Makefile for building and testing the project
+├── OneFile.v          # Main Coq development file
+├── OneFileZFC.v       # Coq development of Zermelo-Fraenkel set theory
+├── printer.ml         # Printer module for the project
+└── verify.py         # Verification script
+```
+
 The `examples/` directory contains example Coq developments that demonstrate the usage of the library. The `notes/` directory includes additional documentation and notes related to the project. The `tests/` directory contains the automated test suite, which includes unit tests and integration tests. The `tickets/` directory contains project management tickets, including the current ticket for improving the README.
 
 The repository has the following structure:

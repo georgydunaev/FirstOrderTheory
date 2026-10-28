@@ -1,4 +1,10 @@
-all: coq_compile compile
+all:
+	coqc OneFile.v
+	coqc OneFileZFC.v
+
+test:
+	python3 tests/test_basic.py
+ coq_compile compile
 
 .PHONY: all go test compile
 
