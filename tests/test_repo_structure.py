@@ -43,6 +43,7 @@ def read(relpath):
 
 
 from utils import strip_comments
+def strip_comments(text):
     """Replace every Coq comment (nested ``(* ... *)``) by blanks.
 
     Returns ``(stripped, final_depth, min_depth)``.  Newlines are preserved so
