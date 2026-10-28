@@ -1,5 +1,11 @@
 # Ticket 002: Enhance Membership-Only Fragment
 
+## Ticket 002: Enhance Membership-Only Fragment
+
+**Status:** REOPENED
+
+**Reason:** No automated test suite present. Manual review required. Please add comprehensive unit tests and ensure all edge cases are covered before reopening.
+
 ## Description
 
 ### Review Feedback
