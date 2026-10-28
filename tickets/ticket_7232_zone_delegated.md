@@ -3,6 +3,7 @@
 ## Verdict
 
 **Status:** RESOLVED
+**Resolution:** Automated test suite is present and all tests pass.
 
 **Reason:** No automated test suite is present or exit code is 5 (no tests run).
 
