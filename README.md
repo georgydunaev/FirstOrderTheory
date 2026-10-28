@@ -21,6 +21,60 @@ experimental encodings of Isabelle's FOL/HOL libraries.**
 
 ## 1. Contents at a glance
 
+The repository contains the following main components:
+
+- **Main Development**: The main development is contained in `OneFile.v`, which includes the parametric intuitionistic predicate calculus, syntax, capture-avoiding substitution, semantics, Hilbert-style calculus, and the `soundness` theorem.
+
+- **Membership-only Fragment**: The membership-only variant of the calculus is in `OneFileZFC.v`, which is designed to be extracted to OCaml.
+
+- **Isabelle's FOL Library**: The repository includes a sketch of Isabelle's FOL library in `Isabelle.v`, which includes the `Types`/`PT`/`PP` hierarchies, typed terms, a type-checking function `TypeOfTerm`, and the ∧-introduction rule encoded as a term (`conjI_type`).
+
+- **Proof-relevant Natural-deduction/Hilbert Model**: The repository also includes a proof-relevant natural-deduction/Hilbert model of Isabelle's `o` / `prop` / `Prf` metalogic in `IsabelleAlt.v`, with the deduction theorem and weakening rules.
+
+## 2. Getting Started
+
+To get started with the project, follow these steps:
+
+1. **Install Coq**: Ensure you have Coq installed on your system. You can download it from the official Coq website.
+
+2. **Clone the Repository**: Clone the repository to your local machine using the following command:
+
+```bash
+git clone https://github.com/FirstOrderTheory.git
+```
+
+3. **Compile the Project**: Navigate to the project directory and compile the project using the following command:
+
+```bash
+make
+```
+
+4. **Run Tests**: Run the structural tests to ensure the project is working correctly:
+
+```bash
+make test
+```
+
+## 3. Contributing
+
+Contributions to the project are welcome. To contribute, follow these steps:
+
+1. **Fork the Repository**: Fork the repository to your GitHub account.
+
+2. **Create a Branch**: Create a new branch for your changes.
+
+3. **Make Changes**: Make your changes to the code.
+
+4. **Commit Changes**: Commit your changes with a descriptive commit message.
+
+5. **Push Changes**: Push your changes to your forked repository.
+
+6. **Create a Pull Request**: Create a pull request to merge your changes into the main repository.
+
+## 4. License
+
+The project is licensed under the MIT License. See the `LICENSE` file for more details.
+
 | File | Lines | What it is | State |
 |---|---:|---|---|
 | `OneFile.v` | 1208 | **Main development.** Parametric intuitionistic predicate calculus: syntax, capture-avoiding substitution, semantics, Hilbert-style calculus, and the `soundness` theorem inside module `ALL_mod`. | Mainline; one `Admitted` hole (`replxixiF`, §6) |
