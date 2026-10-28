@@ -18,6 +18,59 @@ The repository has the following structure:
 ```
 FirstOrderTheory/
 ├── examples/          # Example Coq developments
+├── notes/             # Additional documentation and notes
+├── tests/             # Automated test suite
+├── tickets/           # Project management tickets
+├── DOCUMENTATION.md   # Detailed project documentation
+├── Makefile           # Makefile for building and testing the project
+├── OneFile.v          # Main Coq development file
+├── OneFileZFC.v       # Coq development of Zermelo-Fraenkel set theory
+├── printer.ml         # Printer module for the project
+└── verify.py         # Verification script
+```
+
+## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```
+opam install coq
+```
+
+## 3. Usage
+
+To use the project, you can run the Coq development files using the CoqIDE or the Coq proof assistant. The main development file is `OneFile.v`.
+
+## 4. Automated Test Suite
+
+The project includes an automated test suite in the `tests/` directory. To run the tests, use the following command:
+
+```
+make test
+```
+
+## 5. Contributing
+
+Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md` file.
+
+## 6. License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
 ├── notes/             # Derivation notes and explanations
 ├── tests/             # Test suite and utilities
 ├── tickets/           # Issue and improvement tickets
