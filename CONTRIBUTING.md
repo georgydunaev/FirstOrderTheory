@@ -1,29 +1,59 @@
 # Contributing to FirstOrderTheory
 
-We welcome contributions to the FirstOrderTheory project. To ensure a smooth and efficient contribution process, please follow these guidelines.
+We welcome contributions to the FirstOrderTheory project! Here are some guidelines to help you get started.
 
 ## How to Contribute
 
-1. **Fork the Repository**: Start by forking the repository to your own GitHub account.
+1. **Fork the Repository**: Fork the repository to your own GitHub account.
 
-2. **Create a Branch**: Create a new branch for your changes. Use a descriptive name that reflects the purpose of your changes.
+2. **Clone the Repository**: Clone the forked repository to your local machine.
 
-3. **Make Changes**: Implement your changes in the new branch. Ensure your code follows the project's coding standards.
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
 
-4. **Write Tests**: Write tests for your changes to ensure they work as expected.
+3. **Create a Branch**: Create a new branch for your feature or bug fix.
 
-5. **Submit a Pull Request**: Once your changes are ready, submit a pull request to the main repository. Provide a detailed description of your changes.
+```bash
+git checkout -b feature/your-feature-name
+```
 
-## Code of Conduct
+4. **Make Changes**: Make your changes to the codebase.
 
-We expect all contributors to adhere to our Code of Conduct. Please read and follow it to ensure a positive and inclusive environment for everyone.
+5. **Commit Changes**: Commit your changes with a descriptive commit message.
 
-## Reporting Issues
+```bash
+git commit -m "Add your descriptive message here"
+```
 
-If you encounter any issues or have suggestions for improvement, please report them using the GitHub issue tracker. Provide as much detail as possible to help us understand and address the issue.
+6. **Push Changes**: Push your changes to your forked repository.
 
-## Code Review Process
+```bash
+git push origin feature/your-feature-name
+```
 
-All contributions will go through a code review process. We will provide feedback and request changes if necessary. Once your changes are approved, they will be merged into the main repository.
+7. **Create a Pull Request**: Create a pull request from your forked repository to the main repository.
 
-Thank you for contributing to FirstOrderTheory!
+## Code Style
+
+- Follow the existing code style in the project.
+- Use meaningful variable and function names.
+- Add comments to explain complex code.
+
+## Testing
+
+- Ensure your changes pass all existing tests.
+- Add new tests for new features.
+
+## Documentation
+
+- Update the documentation to reflect your changes.
+
+## License
+
+By contributing to FirstOrderTheory, you agree that your contributions will be licensed under the MIT License.
+
+## Questions
+
+If you have any questions, feel free to open an issue or contact the project maintainers.

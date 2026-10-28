@@ -29,6 +29,147 @@ FirstOrderTheory/
 └── verify.py         # Verification script
 ```
 
+## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+opam install coq
+opam install ocamlfind
+```
+
+3. Build the project:
+
+```bash
+make
+```
+
+## 3. Usage
+
+To use the project, follow these steps:
+
+1. Run the verification script:
+
+```bash
+python3 verify.py
+```
+
+2. Explore the example Coq developments in the `examples/` directory.
+
+## 4. Automated Test Suite
+
+The project includes an automated test suite in the `tests/` directory. To run the tests:
+
+```bash
+make test
+```
+
+## 5. Contributing
+
+Contributions are welcome! Please read the `CONTRIBUTING.md` file for guidelines on how to contribute to the project.
+
+## 6. License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
+
+## 7. Notes
+
+- The repository follows a "never discard an approach" rule, meaning alternative proofs, abandoned attempts, and work-in-progress blocks remain in the sources as comments.
+- All aborted proofs are documented in the source files with the keyword "Abort" in their comments. For example, see `IsabelleAlt.v:71`.
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
+├── notes/             # Additional documentation and notes
+├── tests/             # Automated test suite
+├── tickets/           # Project management tickets
+├── DOCUMENTATION.md   # Detailed project documentation
+├── Makefile           # Makefile for building and testing the project
+├── OneFile.v          # Main Coq development file
+├── OneFileZFC.v       # Coq development of Zermelo-Fraenkel set theory
+├── printer.ml         # Printer module for the project
+└── verify.py         # Verification script
+```
+
+## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+opam install coq
+opam install ocamlfind
+```
+
+3. Build the project:
+
+```bash
+make
+```
+
+## 3. Usage
+
+To use the project, you can run the following commands:
+
+- To run the automated test suite:
+
+```bash
+make test
+```
+
+- To verify the Coq developments:
+
+```bash
+python3 verify.py
+```
+
+## 4. Contributing
+
+Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to the project.
+
+## 5. License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 6. Documentation
+
+For more detailed information, please refer to the [DOCUMENTATION.md](DOCUMENTATION.md) file.
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
+├── notes/             # Additional documentation and notes
+├── tests/             # Automated test suite
+├── tickets/           # Project management tickets
+├── DOCUMENTATION.md   # Detailed project documentation
+├── Makefile           # Makefile for building and testing the project
+├── OneFile.v          # Main Coq development file
+├── OneFileZFC.v       # Coq development of Zermelo-Fraenkel set theory
+├── printer.ml         # Printer module for the project
+└── verify.py         # Verification script
+```
+
 The `examples/` directory contains example Coq developments that demonstrate the usage of the library. The `notes/` directory includes additional documentation and notes related to the project. The `tests/` directory will contain the automated test suite, which will include unit tests and integration tests. The `tickets/` directory contains project management tickets, including this one.
 
 ## 2. Mathematical Contents
