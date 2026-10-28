@@ -3,5 +3,7 @@
 *.cmi
 *.cmo
 a.out
+prog.ml
+prog.mli
 __pycache__/
 *.pyc

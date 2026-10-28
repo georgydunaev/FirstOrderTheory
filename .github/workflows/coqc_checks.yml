@@ -1,0 +1,13 @@
+name: Coq Check
+
+on: [push, pull_request]
+
+jobs:
+  coq-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Coq
+      run: sudo apt-get update && sudo apt-get install -y coq
+    - name: Run coqc checks
+      run: make compile

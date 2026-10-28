@@ -24,6 +24,17 @@ make go               # ocamlc -i printer.ml; ocamlc -c prog.mli; ocamlc -o a.ou
 4. Decide whether generated artefacts should be in `.gitignore`.
 5. Optionally wire `make test` into the workspace-level CI for automatic regression checks.
 
+**Constructive Feedback:**
+
+- The ground-truth tests passed, but the Coq to OCaml extraction pipeline is not fully implemented or verified.
+- The ticket needs to be reopened for further development and testing.
+
+1. Install Coq in the container or set up a CI job with `coqc` checks.
+2. Address the missing `.mli` file issue by either dropping the step or extracting with `Extraction Blacklist`.
+3. Replace the placeholder `printer.ml` with a real pretty-printer for the extracted proof constructors.
+4. Decide whether generated artefacts should be in `.gitignore`.
+5. Optionally wire `make test` into the workspace-level CI for automatic regression checks.
+
 - [ ] `coqc` is not installed in this container (`sudo` is blocked by the `no new privileges`
       flag, so `apt-get install coq` is impossible). Install/provide Coq (or a CI job with
       `coqc OneFile.v && coqc OneFileZFC.v && coqc Isabelle.v …`) — this is the single most
