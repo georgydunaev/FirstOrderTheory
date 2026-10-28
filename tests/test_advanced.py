@@ -1,5 +1,14 @@
 import unittest
 
+class FVC:
+    def __init__(self, var):
+        self.var = var
+
+class FSC:
+    def __init__(self, func, args):
+        self.func = func
+        self.args = args
+
 class TestAdvanced(unittest.TestCase):
     def test_terms_ind(self):
         # Test the Terms_ind theorem
@@ -8,7 +17,7 @@ sys.path.append('/botworkspace/FirstOrderTheory')
 from FirstOrderTheory import Terms_ind
 
         # Test Terms_ind with a free variable
-                sv = "x"
+        sv = "x"
         self.assertTrue(Terms_ind(lambda t: t == FVC(sv), lambda sv: True, lambda f, v: True, FVC(sv)))
 
         # Test Terms_ind with a function symbol
