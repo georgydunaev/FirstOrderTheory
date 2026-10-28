@@ -5,6 +5,7 @@ Require Import Coq.Lists.List.
 Require Import Coq.Vectors.Vector.
 Require Import Coq.Structures.Equalities.
 Require Coq.extraction.Extraction.
+Extraction "prog.ml" PREPR.
 
 (* SetVars represents set variables. *)Inductive SetVars :=
 | Va : nat -> SetVars.

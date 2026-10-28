@@ -7,6 +7,7 @@
 > - **Sources**: all Coq (`.v`) and OCaml (`.ml`) files are the work of the upstream repository author, *Georgy Dunaev* <georgedunaev@gmail.com> (see the header comment of `OneFile.v` / `OneFileZFC.v`). Nothing in the sources was deleted or rewritten by this pass.
 > - **This README**, the structural test suite (`tests/`), the `make test` target, the *parse-level* fixes in `Isabelle.v`, and the follow-up tickets `tickets/ticket_724*.md` were produced for **Ticket #7231 — Pass 1/5 (Carte Blanche Exploration & Architecture README)** by **`opencode/mimo-v2.6-flash-free`** (**Capability Tier 1**) on 2026-10-27.
 > - **Preservation policy**: alternative proofs, abandoned attempts and work-in-progress blocks remain in the sources as comments (§7). This repository follows a "never discard an approach" rule.
+> - **Abort**: All aborted proofs are documented in the source files with the keyword "Abort" in their comments.
 
 ---
 

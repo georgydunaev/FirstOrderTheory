@@ -3,3 +3,9 @@ Definition Terms_ind (T : Terms -> Prop)
                        (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)),
                                 (forall i, T (Vector.nth v i)) -> T (FSC f v))
                        (t:Terms) : T t.
+
+(* Another style of the proof *)
+                       (H_FVC : forall sv, T (FVC sv))
+                       (H_FSC : forall (f:FSV) (v:Vector.t Terms (fsv f)),
+                                (forall i, T (Vector.nth v i)) -> T (FSC f v))
+                       (t:Terms) : T t.
