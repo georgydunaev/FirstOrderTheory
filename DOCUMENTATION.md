@@ -53,6 +53,8 @@ make test
 
 ## Contributing
 
+Contributions are welcome! Please follow the guidelines in the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on how to contribute to the project.
+
 Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md` file for more information on how to contribute to the project.
 
 The `Makefile` includes the following targets:
