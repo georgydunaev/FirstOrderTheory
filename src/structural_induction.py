@@ -1,5 +1,9 @@
 # Structural Induction Proof for replxixiF
 
+# This class implements the structural induction proof for the replxixiF function.
+# The method replxixiF performs a structural induction proof on the formula A.
+# The helper functions are used to check the type of the formula A.
+
 # This file contains the structural induction proof for the replxixiF function.
 
 class StructuralInductionProof:
@@ -29,17 +33,20 @@ class StructuralInductionProof:
 
 def is_atomic(A):
     """Check if A is an atomic formula."""
-    return True
+    # Implement logic to check if A is an atomic formula
+    return isinstance(A, str) and not any(op in A for op in ['∧', '∨', '→', '¬', '∀', '∃'])
 
 
 def is_connective(A):
     """Check if A is a connective formula."""
-    return True
+    # Implement logic to check if A is a connective formula
+    return isinstance(A, str) and any(op in A for op in ['∧', '∨', '→', '¬'])
 
 
 def is_fora(A):
     """Check if A is a Fora formula."""
-    return True
+    # Implement logic to check if A is a Fora formula
+    return isinstance(A, str) and '∀' in A
 
 
 def is_exis(A):

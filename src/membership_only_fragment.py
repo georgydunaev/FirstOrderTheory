@@ -1,5 +1,9 @@
 # Membership-Only Fragment
 
+# This class implements the membership-only fragment of first-order logic.
+# It provides a method to check if an element is a member of a set.
+# The method adheres to the deduction rules of first-order logic.
+
 # This file contains the implementation of the membership-only fragment.
 
 class MembershipOnlyFragment:
