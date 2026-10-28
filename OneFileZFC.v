@@ -6,23 +6,23 @@ Require Import Coq.Vectors.Vector.
 Require Import Coq.Structures.Equalities.
 Require Coq.extraction.Extraction.
 
-Inductive SetVars :=
+(* SetVars represents set variables. *)Inductive SetVars :=
 | Va : nat -> SetVars.
 
-Inductive Terms : Type :=
+(* Terms represents terms, including free variables, union, and pairing. *)Inductive Terms : Type :=
 | FVC :> SetVars -> Terms
 
 | fsunion : Terms -> Terms
 | fspair : Terms -> Terms -> Terms
 .
 
-Inductive AtomFm : Type :=
+(* AtomFm represents atomic formulas, including membership and equality. *)Inductive AtomFm : Type :=
 | IN : Terms -> Terms -> AtomFm
 
 | EQ : Terms -> Terms -> AtomFm
 .
 
-Inductive Fm :=
+(* Fm represents formulas, including atomic formulas, conjunction, disjunction, implication, and quantifiers. *)Inductive Fm :=
  |Atom :> AtomFm -> Fm
  |Bot :Fm
  |Conj:Fm->Fm->Fm
@@ -32,20 +32,20 @@ Inductive Fm :=
  |Exis(x:SetVars)(f:Fm): Fm
 .
 
-Inductive X := Ord :> nat -> X.
-Inductive X := 
+(* X represents ordinals. *)Inductive X := Ord :> nat -> X.
+(* X represents ordinals. *)Inductive X := 
 | Ord :> nat -> X.
 
-Definition In (x1 x2 : X) : Prop :=
+(* In represents the membership relation between two ordinals. *)Definition In (x1 x2 : X) : Prop :=
   match x1, x2 with
   | Ord n1, Ord n2 => n1 < n2
   end.
 
 Definition membership_model := "Finite ordinals with transitive-closure membership".
 
-Axiom union_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
-Axiom pairing_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
-Axiom equality_axiom : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. := "Finite ordinals with transitive-closure membership".
+(* union_axiom represents the union axiom. *)Axiom union_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
+(* pairing_axiom represents the pairing axiom. *)Axiom pairing_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
+(* equality_axiom represents the equality axiom. *)Axiom equality_axiom : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. := "Finite ordinals with transitive-closure membership".
 Definition zf_fragment_validated := "Ordinal hierarchy".
 
 Theorem soundness : forall (x y : X), In x y -> x < y.
@@ -425,7 +425,7 @@ Record FSV := {
 }.
 
 Unset Elimination Schemes.
-Inductive Terms : Type :=
+(* Terms represents terms, including free variables, union, and pairing. *)Inductive Terms : Type :=
 | FVC :> SetVars.t -> Terms
 | FSC (f:FSV) : (Vector.t Terms (fsv f)) -> Terms.
 Set Elimination Schemes.

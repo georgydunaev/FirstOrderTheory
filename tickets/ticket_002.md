@@ -2,6 +2,10 @@
 
 ## Ticket 002: Enhance Membership-Only Fragment
 
+**Status**: REOPENED
+
+**Reason**: No automated test suite present. Static code analysis required. Please ensure comprehensive test coverage is added before reopening.
+
 **Status:** REOPENED
 
 **Reason:** No automated test suite present. Manual review required. Please add comprehensive unit tests and ensure all edge cases are covered before reopening.
@@ -13,6 +17,13 @@
 **Status:** Reopened
 **Reason:** No automated test suite present. Manual review required.
 **Next Steps:**
+1. Add comprehensive unit tests for the membership-only fragment.
+2. Verify mathematical soundness and type safety.
+3. Ensure the implementation adheres to repository invariants.
+4. Re-run the ground-truth test command after the test suite is added.
+
+## Feedback:
+The ticket was reopened due to the absence of an automated test suite. Please add comprehensive unit tests and ensure all edge cases are covered before reopening the ticket.
 1. Add comprehensive unit tests for the membership-only fragment.
 2. Verify mathematical soundness and type safety.
 3. Ensure the implementation adheres to repository invariants.
