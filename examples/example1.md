@@ -9,7 +9,7 @@ This example demonstrates the use of parametric intuitionistic predicate calculu
 
 ## Example Code
 
-```python
+
 # Define a simple predicate
 predicate = lambda x: x > 0
 
@@ -25,7 +25,7 @@ print(f"Predicate applied to term {term}: {substituted_result}")
 
 # Verify the substitution result
 assert substituted_result == predicate(term), "Substitution verification failed"
-```
+
 
 ## Verification
 
