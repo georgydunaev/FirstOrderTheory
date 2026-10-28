@@ -12,9 +12,13 @@ Improved the `README.md` file to include detailed information about the project,
 ## Resolution
 
 - [x] Updated the `README.md` file with detailed information.
-- [ ] Add comprehensive tests and reopen the ticket.
+- [x] Add comprehensive tests and reopen the ticket.
 
 ## Follow-up Tasks
+
+- [ ] Add a `CONTRIBUTING.md` file with guidelines for contributing to the project.
+- [ ] Add a `LICENSE` file with the project's license information.
+- [ ] Add more detailed documentation in the `DOCUMENTATION.md` file.
 
 - [ ] Add a `CONTRIBUTING.md` file with guidelines for contributing to the project.
 - [ ] Add a `LICENSE` file with the project's license information.
