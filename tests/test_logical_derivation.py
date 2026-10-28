@@ -1,26 +1,32 @@
-# Test cases for the logical derivation example
+# File: /botworkspace/FirstOrderTheory/tests/test_logical_derivation.py
+# Author: mistral/codestral-latest (Capability Tier 1)
+# Ticket: #0004: Add Logical Derivation Example
 
 import unittest
-from logical_derivation import logical_derivation, P, Q, R
+from examples.logical_derivation import logical_derivation
 
 class TestLogicalDerivation(unittest.TestCase):
     def test_logical_derivation(self):
-        result = logical_derivation()
-        self.assertIsNotNone(result, "No x found such that R(x) holds")
-        self.assertTrue(R(result), f"R({result}) should be True")
+        # Define predicates
+        P = lambda x: x > 0
+        Q = lambda x: x < 10
+        R = lambda x: x % 2 == 0
 
-    def test_predicates(self):
-        # Test P(x)
-        self.assertTrue(P(2), "P(2) should be True")
-        self.assertFalse(P(3), "P(3) should be False")
-        
-        # Test Q(x)
-        self.assertTrue(Q(1), "Q(1) should be True")
-        self.assertFalse(Q(0), "Q(0) should be False")
-        
-        # Test R(x)
-        self.assertTrue(R(3), "R(3) should be True")
-        self.assertFalse(R(4), "R(4) should be False")
+        # Test with x_values from 1 to 9
+        x_values = range(1, 10)
+        self.assertTrue(logical_derivation(P, Q, R, x_values))
 
-if __name__ == "__main__":
-    unittest.main()
+        # Test with x_values from 1 to 10
+        x_values = range(1, 11)
+        self.assertTrue(logical_derivation(P, Q, R, x_values))
+
+        # Test with x_values from 1 to 10, but R is always False
+        R = lambda x: False
+        self.assertFalse(logical_derivation(P, Q, R, x_values))
+
+def test_logical_derivation():
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestLogicalDerivation)
+    unittest.TextTestRunner(verbosity=2).run(suite)
+
+if __name__ == '__main__':
+    test_logical_derivation()

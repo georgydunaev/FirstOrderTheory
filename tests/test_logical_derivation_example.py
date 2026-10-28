@@ -3,6 +3,7 @@
 # Date: $(date +%Y-%m-%d)
 
 import pytest
+from ..examples.logical_derivation_example import logical_derivation
 from examples.logical_derivation_example import P, Q, R, x_values
 
 def test_predicate_definitions():
