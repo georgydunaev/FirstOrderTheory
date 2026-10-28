@@ -222,7 +222,7 @@ End PREPR.
 
 Extraction Language OCaml.
 
-Extraction "prog.ml" PREPR.
+Extraction "prog.ml" "prog.mli" PREPR. Extraction Blacklist "prog.mli". Extraction Blacklist "prog.mli".
 
 
 (* ---------- END ---------- *)

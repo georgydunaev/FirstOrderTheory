@@ -14,5 +14,5 @@ let printerPrf =
 (* | A1 of fm * fm *)
 
 let _ =
-  print_endline (printerPrf Prog.thm2)
+  print_endline (printerPrf (try Prog.thm2 with _ -> Prog.PREPR))
 
