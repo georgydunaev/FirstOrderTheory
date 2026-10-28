@@ -30,10 +30,8 @@ Inductive PT : Set :=
 | LRA : PT (* ==> : prop => prop => prop *)
 | BA : PT (* !! : (a => prop) => prop *)
 | TP : PT (* Trueprop : o => prop *)
-(* OLD
 | Impl : PT (* --> : [o, o] => o *)
 | Fora : PT (* \forall : (i => o) => o *)
-*)
 (* IFOL terms: 
   False :: ‹o› and
   conj :: ‹[o, o] => o›  (infixr ‹∧› 35) and
@@ -78,7 +76,11 @@ match t with
 | EVar n => I n
 | ECon c => PTT c
 | ELam n T t => TImp T (TypeOfTerm t)
-| EApp t1 t2 => ?
+| EApp t1 t2 => match TypeOfTerm t1 with
+| TImp T1 T2 => if eqTypes (TypeOfTerm t2) T1 then T2 else TProp
+| _ => TProp
+end
+end.
 end.
 *)
 
