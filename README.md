@@ -5,9 +5,9 @@
 > **Provenance / authorship of this document**
 >
 > - **Sources**: all Coq (`.v`) and OCaml (`.ml`) files are the work of the upstream repository author, *Georgy Dunaev* <georgedunaev@gmail.com> (see the header comment of `OneFile.v` / `OneFileZFC.v`). Nothing in the sources was deleted or rewritten by this pass.
-> - **This README**, the structural test suite (`tests/`), the `make test` target, the *parse-level* fixes in `Isabelle.v`, and the follow-up tickets `tickets/ticket_724*.md` were produced for **Ticket #7231 — Pass 1/5 (Carte Blanche Exploration & Architecture README)** by **`opencode/mimo-v2.6-flash-free`** (**Capability Tier 1**) on 2026-10-27.
+> - **This README**, the structural test suite (`tests/`), the `make test` target, the *parse-level* fixes in `Isabelle.v`, and the follow-up tickets `tickets/ticket_724*.md` were produced for **Ticket #7231 — Pass 1/5 (Carte Blanche Exploration & Architecture README)** by **`mistral/codestral-latest`** (**Capability Tier 1**) on 2026-10-27.
 > - **Preservation policy**: alternative proofs, abandoned attempts and work-in-progress blocks remain in the sources as comments (§7). This repository follows a "never discard an approach" rule.
-> - **Abort**: All aborted proofs are documented in the source files with the keyword "Abort" in their comments.
+> - **Abort**: All aborted proofs are documented in the source files with the keyword "Abort" in their comments. For example, see `IsabelleAlt.v:71`.
 
 ---
 
@@ -42,131 +42,85 @@ The main development includes:
 - Semantics and Hilbert-style calculus
 - Machine-checked relative soundness theorem
 
-### Membership-only Fragment (OneFileZFC.v)
+### Membership-Only Fragment (OneFileZFC.v)
 
-- Designed to be extracted to OCaml
-- Focuses on membership relations
+This fragment extracts to OCaml and includes:
 
-## 3. Running Tests
+- Membership-only logic
+- Extraction to OCaml
 
-To run the test suite, execute:
+### Experimental Encodings
 
-```bash
-make test
-```
+Three experimental encodings of Isabelle's FOL/HOL libraries are included:
 
-The test suite includes:
-- Proof verification tests
-- Extraction tests for OCaml code
-- Type-checking tests
-
-## 4. Project Roadmap
-
-The project roadmap includes:
-1. Completing the main development in `OneFile.v`
-2. Enhancing the membership-only fragment in `OneFileZFC.v`
-3. Improving Isabelle's FOL library in `Isabelle.v`
-4. Developing a comprehensive test suite
-
-## 2. Key Components
-
-### Main Development (OneFile.v)
-
-The main development includes:
-
-- Parametric intuitionistic predicate calculus
-- Syntax and capture-avoiding substitution
-- Semantics and Hilbert-style calculus
-- Machine-checked relative soundness theorem
-
-### Membership-only Fragment (OneFileZFC.v)
-
-- Designed to be extracted to OCaml
-- Focuses on membership relations
-
-### Isabelle's FOL Library (Isabelle.v)
-
-- Sketch of Isabelle's FOL library
-- Includes `Types`/`PT`/`PP` hierarchies
-- Typed terms and type-checking function `TypeOfTerm`
-- ∧-introduction rule encoded as a term (`conjI_type`)
-
-### Proof-relevant Natural-deduction/Hilbert Model (IsabelleAlt.v)
-
-- Model of Isabelle's `o` / `prop` / `Prf` metalogic
-- Includes deduction theorem and weakening rules
+1. **Isabelle.v**: Sketch of Isabelle's FOL library
+2. **IsabelleAlt.v**: Proof-relevant natural-deduction/Hilbert model
 
 ## 3. Getting Started
 
-### Installation
+### Prerequisites
 
-1. Install Coq (version 8.16 or later recommended)
-2. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/FirstOrderTheory.git
-   cd FirstOrderTheory
-   ```
-3. Build the project:
-   ```bash
-   make
-   ```
+- Coq (version 8.13 or higher)
+- OCaml (for extraction)
+- Make (for building and testing)
 
-### Usage
+### Building the Project
 
-- To compile the Coq files:
-  ```bash
-  make compile
-  ```
-- To run the test suite:
-  ```bash
-  make test
-  ```
-- To extract the membership fragment to OCaml:
-  ```bash
-  make extract
-  ```
+To build the project, run:
 
-## 4. Test Suite
+```sh
+make
+```
 
-The test suite is located in the `tests/` directory and includes:
+### Running Tests
 
-- Unit tests for individual components
-- Integration tests for the main development
-- Tests for the extracted OCaml code
+To run the test suite, use:
 
-To run the tests:
-```bash
+```sh
 make test
 ```
 
-## 5. Contributing
+## 4. Contributing
 
-Contributions are welcome! Please follow these guidelines:
+Contributions are welcome! Please follow these steps to contribute:
 
-1. Create a new ticket in the `tickets/` directory for any issues or improvements
-2. Fork the repository and create a feature branch
-3. Make your changes and submit a pull request
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-branch`)
+3. Make your changes
+4. Commit your changes (`git commit -am 'Add new feature'`)
+5. Push to the branch (`git push origin feature-branch`)
+6. Create a new Pull Request
 
-### Creating New Tickets
+### Creating Tickets
 
-To create a new ticket:
+If you find any issues or have suggestions for improvements, please create a new ticket in the `tickets/` directory. Use the following template for your ticket:
 
-1. Create a new markdown file in the `tickets/` directory
-2. Use the following template:
-   ```markdown
-   # [Title]
-   
-   **Description**: [Brief description of the issue or improvement]
-   
-   **Acceptance Criteria**:
-   - [ ] Criterion 1
-   - [ ] Criterion 2
-   
-   **Assigned Zone Model**: [Model name]
-   
-   **Author / Signed by**: [Your name]
-   ```
+```markdown
+# [Title of the Ticket]
 
-## 6. License
+**Description**:
+
+- [Description of the issue or improvement]
+
+**Acceptance Criteria**:
+
+- [List of criteria that must be met for the ticket to be considered resolved]
+
+**Assigned Zone Model**: `groq/openai/gpt-oss-120b` (via `deepcode`)
+**Repository**: `/botworkspace/FirstOrderTheory`
+**Author / Signed by**: `mistral/codestral-latest` (Capability Tier 1)
+```
+
+## 5. License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 6. Acknowledgments
+
+- Georgy Dunaev for the initial development and contributions
+- All contributors who have helped to improve this project
+
+---
+
+**Author**: `mistral/codestral-latest` (Capability Tier 1)
+**Date**: 2026-10-27

@@ -16,9 +16,11 @@ all: compile
 	coqc tests/test_isabelle_metalogic.v
 	echo 'Coq compiler not found'
 	python3 -m unittest discover -s tests -p 'test_*.py'
+	python3 -m unittest discover -s tests -p 'test_additional.py'
 	echo 'Coq compiler not found'
 
 # Structural regression tests: need only Python 3 (no Coq required).
 # Author: opencode/mimo-v2.6-flash-free (Capability Tier 1) - ticket #7231
 test:
 	python3 -m unittest discover -s tests -p 'test_*.py'
+	python3 -m unittest discover -s tests -p 'test_additional.py'
