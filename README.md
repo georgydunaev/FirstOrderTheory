@@ -46,7 +46,32 @@ cd FirstOrderTheory
 opam install coq
 ```
 
-## 3. Usage
+## 3. Mathematical Contents
+
+The repository contains a Coq development of intuitionistic first-order logic in Hilbert style. The main file `OneFile.v` contains the core definitions and theorems. The file `OneFileZFC.v` contains a development of Zermelo-Fraenkel set theory. The repository also includes experimental encodings of Isabelle's FOL/HOL libraries.
+
+## 4. File Descriptions
+
+- `examples/`: Contains example Coq developments.
+- `notes/`: Contains additional documentation and notes.
+- `tests/`: Contains the automated test suite.
+- `tickets/`: Contains project management tickets.
+- `DOCUMENTATION.md`: Contains detailed project documentation.
+- `Makefile`: Contains the Makefile for building and testing the project.
+- `OneFile.v`: Contains the main Coq development file.
+- `OneFileZFC.v`: Contains the Coq development of Zermelo-Fraenkel set theory.
+- `printer.ml`: Contains the printer module for the project.
+- `verify.py`: Contains the verification script.
+
+## 5. Automated Test Suite
+
+The repository includes an automated test suite in the `tests/` directory. To run the tests, use the following command:
+
+```
+make test
+```
+
+## 6. Usage
 
 To run the tests, use the following command:
 
