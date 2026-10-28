@@ -29,7 +29,89 @@ FirstOrderTheory/
 └── verify.py         # Verification script
 ```
 
+The `examples/` directory contains example Coq developments that demonstrate the usage of the library. The `notes/` directory includes additional documentation and notes related to the project. The `tests/` directory contains the automated test suite, which includes unit tests and integration tests. The `tickets/` directory contains project management tickets, including the current ticket for improving the README.
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
+├── notes/             # Additional documentation and notes
+├── tests/             # Automated test suite
+├── tickets/           # Project management tickets
+├── DOCUMENTATION.md   # Detailed project documentation
+├── Makefile           # Makefile for building and testing the project
+├── OneFile.v          # Main Coq development file
+├── OneFileZFC.v       # Coq development of Zermelo-Fraenkel set theory
+├── printer.ml         # Printer module for the project
+└── verify.py         # Verification script
+```
+
+The `examples/` directory contains example Coq developments that demonstrate the usage of the library. The `notes/` directory includes additional documentation and notes related to the project. The `tests/` directory contains the automated test suite, which includes unit tests and integration tests. The `tickets/` directory contains project management tickets, including this one. The `DOCUMENTATION.md` file provides detailed project documentation. The `Makefile` includes targets for building and testing the project. The `OneFile.v` and `OneFileZFC.v` files contain the main Coq developments. The `printer.ml` file is the printer module for the project, and the `verify.py` script is used for verification.
+
+The repository has the following structure:
+
+```
+FirstOrderTheory/
+├── examples/          # Example Coq developments
+├── notes/             # Additional documentation and notes
+├── tests/             # Automated test suite
+├── tickets/           # Project management tickets
+├── DOCUMENTATION.md   # Detailed project documentation
+├── Makefile           # Makefile for building and testing the project
+├── OneFile.v          # Main Coq development file
+├── OneFileZFC.v       # Coq development of Zermelo-Fraenkel set theory
+├── printer.ml         # Printer module for the project
+└── verify.py         # Verification script
+```
+
 ## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/username/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+make install
+```
+
+This will install all the necessary dependencies, including Coq and OCaml.
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```
+opam install coq
+```
+
+3. Build the project:
+
+```
+make build
+```
+
+4. Run the tests to ensure everything is working correctly:
+
+```
+make test
+```
+
+These steps will ensure that you have all the necessary dependencies and that the project is built and tested correctly.
 
 To install the project, follow these steps:
 
@@ -47,6 +129,52 @@ opam install coq
 ```
 
 ## 3. Usage
+
+To use the project, follow these steps:
+
+1. Build the project:
+
+```bash
+make build
+```
+
+2. Run the tests:
+
+```bash
+make test
+```
+
+3. To verify the proofs, run:
+
+```bash
+make verify
+```
+
+For more detailed usage examples, refer to the `examples/` directory.
+
+To use the project, follow these examples:
+
+1. **Example 1**: Basic usage of the library
+
+```coq
+Require Import OneFile.
+
+Open Scope fol_scope.
+
+Definition example : prop := (p ∧ q) → (q ∧ p).
+```
+
+2. **Example 2**: Using the ZFC set theory development
+
+```coq
+Require Import OneFileZFC.
+
+Open Scope zfc_scope.
+
+Definition example_set : set := {x | x ∈ A ∧ x ∈ B}.
+```
+
+These examples demonstrate how to use the main features of the library.
 
 To use the project, follow these steps:
 
@@ -76,6 +204,24 @@ make verify
 
 ## 4. Automated Test Suite
 
+The project includes an automated test suite located in the `tests/` directory. The test suite includes unit tests and integration tests to ensure the correctness and robustness of the library. To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test results will be displayed in the terminal.
+
+The project includes an automated test suite located in the `tests/` directory. The test suite includes unit tests and integration tests to ensure the correctness and robustness of the library.
+
+To run the tests, use the following command:
+
+```
+make test
+```
+
+The test suite will execute all the tests and provide a summary of the results. This ensures that any changes to the library do not introduce regressions.
+
 The automated test suite is located in the `tests/` directory. To run the tests, use the following command:
 
 ```
@@ -84,9 +230,24 @@ make test
 
 ## 5. Contributing
 
+We welcome contributions to the project! To contribute, please follow these guidelines:
+
+1. **Fork the repository** and create a new branch for your changes.
+2. **Make your changes** and ensure they follow the project's coding standards.
+3. **Write tests** for your changes to ensure they work correctly.
+4. **Submit a pull request** with a clear description of your changes.
+
+Please refer to the `CONTRIBUTING.md` file for more detailed guidelines on contributing to the project.
+
+Contributions are welcome! Please read the `CONTRIBUTING.md` file for guidelines on how to contribute to the project. This file will be added in a follow-up task.
+
 Contributions are welcome! Please read the `CONTRIBUTING.md` file for guidelines on how to contribute to the project.
 
 ## 6. License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details. This file will be added in a follow-up task.
 
 This project is licensed under the MIT License - see the `LICENSE` file for details.
 
@@ -160,6 +321,52 @@ To install the project, follow these steps:
 
 1. Clone the repository:
 
+```bash
+git clone https://github.com/username/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+make install
+```
+
+This will install all the necessary dependencies, including Coq and OCaml.
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```
+opam install coq
+```
+
+3. Build the project:
+
+```
+make build
+```
+
+4. Run the tests to ensure everything is working correctly:
+
+```
+make test
+```
+
+These steps will ensure that you have all the necessary dependencies and that the project is built and tested correctly.
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
 ```
 git clone https://github.com/yourusername/FirstOrderTheory.git
 cd FirstOrderTheory
@@ -199,6 +406,52 @@ opam install coq
 ```
 
 ## 3. Usage
+
+To use the project, follow these steps:
+
+1. Build the project:
+
+```bash
+make build
+```
+
+2. Run the tests:
+
+```bash
+make test
+```
+
+3. To verify the proofs, run:
+
+```bash
+make verify
+```
+
+For more detailed usage examples, refer to the `examples/` directory.
+
+To use the project, follow these examples:
+
+1. **Example 1**: Basic usage of the library
+
+```coq
+Require Import OneFile.
+
+Open Scope fol_scope.
+
+Definition example : prop := (p ∧ q) → (q ∧ p).
+```
+
+2. **Example 2**: Using the ZFC set theory development
+
+```coq
+Require Import OneFileZFC.
+
+Open Scope zfc_scope.
+
+Definition example_set : set := {x | x ∈ A ∧ x ∈ B}.
+```
+
+These examples demonstrate how to use the main features of the library.
 
 To use the project, follow these steps:
 
@@ -242,6 +495,24 @@ make test
 
 ## 4. Automated Test Suite
 
+The project includes an automated test suite located in the `tests/` directory. The test suite includes unit tests and integration tests to ensure the correctness and robustness of the library. To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test results will be displayed in the terminal.
+
+The project includes an automated test suite located in the `tests/` directory. The test suite includes unit tests and integration tests to ensure the correctness and robustness of the library.
+
+To run the tests, use the following command:
+
+```
+make test
+```
+
+The test suite will execute all the tests and provide a summary of the results. This ensures that any changes to the library do not introduce regressions.
+
 The automated test suite is located in the `tests/` directory. To run the tests, use the following command:
 
 ```
@@ -250,9 +521,24 @@ make test
 
 ## 5. Contributing
 
+We welcome contributions to the project! To contribute, please follow these guidelines:
+
+1. **Fork the repository** and create a new branch for your changes.
+2. **Make your changes** and ensure they follow the project's coding standards.
+3. **Write tests** for your changes to ensure they work correctly.
+4. **Submit a pull request** with a clear description of your changes.
+
+Please refer to the `CONTRIBUTING.md` file for more detailed guidelines on contributing to the project.
+
+Contributions are welcome! Please read the `CONTRIBUTING.md` file for guidelines on how to contribute to the project. This file will be added in a follow-up task.
+
 Contributions are welcome! Please read the `CONTRIBUTING.md` file for guidelines on how to contribute to the project.
 
 ## 6. License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details. This file will be added in a follow-up task.
 
 This project is licensed under the MIT License - see the `LICENSE` file for details.
 
@@ -273,6 +559,52 @@ FirstOrderTheory/
 ```
 
 ## 2. Installation
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/username/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```bash
+make install
+```
+
+This will install all the necessary dependencies, including Coq and OCaml.
+
+To install the project, follow these steps:
+
+1. Clone the repository:
+
+```
+git clone https://github.com/yourusername/FirstOrderTheory.git
+cd FirstOrderTheory
+```
+
+2. Install the required dependencies:
+
+```
+opam install coq
+```
+
+3. Build the project:
+
+```
+make build
+```
+
+4. Run the tests to ensure everything is working correctly:
+
+```
+make test
+```
+
+These steps will ensure that you have all the necessary dependencies and that the project is built and tested correctly.
 
 To install the project, follow these steps:
 
@@ -355,6 +687,24 @@ To use the project, you can run the Coq development files using the CoqIDE or th
 
 ## 4. Automated Test Suite
 
+The project includes an automated test suite located in the `tests/` directory. The test suite includes unit tests and integration tests to ensure the correctness and robustness of the library. To run the tests, use the following command:
+
+```bash
+make test
+```
+
+The test results will be displayed in the terminal.
+
+The project includes an automated test suite located in the `tests/` directory. The test suite includes unit tests and integration tests to ensure the correctness and robustness of the library.
+
+To run the tests, use the following command:
+
+```
+make test
+```
+
+The test suite will execute all the tests and provide a summary of the results. This ensures that any changes to the library do not introduce regressions.
+
 The project includes an automated test suite in the `tests/` directory. To run the tests, use the following command:
 
 ```
@@ -363,9 +713,24 @@ make test
 
 ## 5. Contributing
 
+We welcome contributions to the project! To contribute, please follow these guidelines:
+
+1. **Fork the repository** and create a new branch for your changes.
+2. **Make your changes** and ensure they follow the project's coding standards.
+3. **Write tests** for your changes to ensure they work correctly.
+4. **Submit a pull request** with a clear description of your changes.
+
+Please refer to the `CONTRIBUTING.md` file for more detailed guidelines on contributing to the project.
+
+Contributions are welcome! Please read the `CONTRIBUTING.md` file for guidelines on how to contribute to the project. This file will be added in a follow-up task.
+
 Contributions are welcome! Please follow the guidelines in the `CONTRIBUTING.md` file.
 
 ## 6. License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details. This file will be added in a follow-up task.
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
