@@ -15,7 +15,7 @@ Proof.
   apply term_equivalence.
 Qed.
 
-(* Test for term_normalization *) Lemma test_term_normalization : forall (t : Terms), Terms.
+(* Test for term_normalization *) Lemma test_term_normalization : forall (t : Terms), Terms.\nProof.\n  apply term_normalization.\nQed.\n\n(* Additional test cases for term_normalization *) Lemma test_term_normalization_edge_cases : forall (t : Terms), Terms.\nProof.\n  apply term_normalization.\nQed.
 Proof.
   apply term_normalization.
 Qed.
