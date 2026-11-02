@@ -37,12 +37,10 @@ SOURCE_FILES = V_FILES + ["printer.ml", "Makefile", ".gitignore"]
 # --------------------------------------------------------------------------- #
 
 
-from .utils import read
 def read(relpath):
     return (ROOT / relpath).read_text(encoding="utf-8", errors="replace")
 
 
-from .utils import strip_comments
 def strip_comments(text):
     """Replace every Coq comment (nested ``(* ... *)``) by blanks.
 

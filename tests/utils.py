@@ -1,5 +1,11 @@
+import pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+
+
 def read(relpath: str) -> str:
     return (ROOT / relpath).read_text(encoding="utf-8", errors="replace")
+
 
 def strip_comments(text: str):
     """Replace every Coq comment (nested ``(* ... *)``) by blanks.
@@ -26,8 +32,9 @@ def strip_comments(text: str):
                 min_depth = depth
             out.append("  ")
             i += 2
-        else:
-            out.append(text[i])
-            i += 1
-    assert depth >= 0, f"Unbalanced comments: depth={depth}"
-    return ''.join(out), depth, min_depth
+            continue
+        ch = text[i]
+        out.append(ch if depth == 0 else (" " if ch != "\n" else "\n"))
+        i += 1
+    assert depth == 0, f"Unbalanced comments: depth={depth}"
+    return "".join(out), depth, min_depth

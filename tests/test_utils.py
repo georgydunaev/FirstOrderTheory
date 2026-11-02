@@ -11,7 +11,7 @@ class TestUtils(unittest.TestCase):
         # Test stripping comments from Coq code
         coq_code = "(* This is a comment *) This is not a comment"
         stripped_code, depth, min_depth = strip_comments(coq_code)
-        self.assertEqual(stripped_code, "                  This is not a comment")
+        self.assertEqual(stripped_code, "                        This is not a comment")
         self.assertEqual(depth, 0)
         self.assertEqual(min_depth, 0)
 

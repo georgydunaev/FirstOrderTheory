@@ -2,7 +2,6 @@
 1) Maybe http://color.inria.fr/papers/koprowski06draft.pdf ?
 *)
 (* use Isabelle notation in comments *)
-Require Import Coq.Logic.Decidable.
 Inductive Types : Set :=
 | TVar : nat -> Types (* 'a 'b 'c ... *)
 | TImp : Types -> Types -> Types (* "=>" *)
@@ -31,8 +30,10 @@ Inductive PT : Set :=
 | LRA : PT (* ==> : prop => prop => prop *)
 | BA : PT (* !! : (a => prop) => prop *)
 | TP : PT (* Trueprop : o => prop *)
+(* OLD
 | Impl : PT (* --> : [o, o] => o *)
 | Fora : PT (* \forall : (i => o) => o *)
+*)
 (* IFOL terms: 
   False :: ‹o› and
   conj :: ‹[o, o] => o›  (infixr ‹∧› 35) and
@@ -49,24 +50,8 @@ Inductive PT : Set :=
 Fixpoint PTT (c : PT) : Types :=
 match c with
 | LRA => TImp TProp (TImp TProp TProp)
-| BA => TImp (TImp TProp TProp) TProp
+| BA => TImp (TImp (TVar 0) TProp) TProp
 | TP => TImp TO TI
-| Impl => TImp TO (TImp TO TO)
-| Fora => TImp (TImp TI TO) TO
-| EFalse => TO
-| Econj => TImp TO (TImp TO TO)
-| Edisj => TImp TO (TImp TO TO)
-| Eimp => TImp TO (TImp TO TO)
-end.
-| BA => TImp (TImp TI TProp) TProp
-| TP => TImp TO TI
-| Impl => TImp TO (TImp TO TO)
-| Fora => TImp (TImp TI TO) TO
-| EFalse => TO
-| Econj => TImp TO (TImp TO TO)
-| Edisj => TImp TO (TImp TO TO)
-| Eimp => TImp TO (TImp TO TO)
-
 (*
 | Impl => TImp TO (TImp TO TO)
 | Fora => TImp (TImp TI TO) TO
@@ -93,11 +78,7 @@ match t with
 | EVar n => I n
 | ECon c => PTT c
 | ELam n T t => TImp T (TypeOfTerm t)
-| EApp t1 t2 => match TypeOfTerm t1 with
-| TImp T1 T2 => if eqTypes (TypeOfTerm t2) T1 then T2 else TProp
-| _ => TProp
-end
-end.
+| EApp t1 t2 => ?
 end.
 *)
 
@@ -190,7 +171,8 @@ end.
 
 (*
 | LRA => TImp TProp (TImp TProp TProp)
-
+| BA => TImp (TImp (TVar 0) TProp) TProp
+| TP => TImp TO TI
 | Impl => TImp TO (TImp TO TO)
 | Fora => TImp (TImp TI TO) TO
 *)

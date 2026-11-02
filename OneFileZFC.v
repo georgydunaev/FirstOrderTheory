@@ -5,25 +5,26 @@ Require Import Coq.Lists.List.
 Require Import Coq.Vectors.Vector.
 Require Import Coq.Structures.Equalities.
 Require Coq.extraction.Extraction.
-Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Library "prog.ml". PREPR. Extraction Blacklist.
 
-(* SetVars represents set variables. *)Inductive SetVars :=
+Inductive SetVars :=
 | Va : nat -> SetVars.
 
-(* Terms represents terms, including free variables, union, and pairing. *)Inductive Terms : Type :=
+Inductive Terms : Type :=
 | FVC :> SetVars -> Terms
-
-| fsunion : Terms -> Terms
+(*
+| fsunion :Terms -> Terms
 | fspair : Terms -> Terms -> Terms
+*)
 .
 
-(* AtomFm represents atomic formulas, including membership and equality. *)Inductive AtomFm : Type :=
+Inductive AtomFm : Type :=
 | IN : Terms -> Terms -> AtomFm
-
+(*
 | EQ : Terms -> Terms -> AtomFm
+*)
 .
 
-(* Fm represents formulas, including atomic formulas, conjunction, disjunction, implication, and quantifiers. *)Inductive Fm :=
+Inductive Fm :=
  |Atom :> AtomFm -> Fm
  |Bot :Fm
  |Conj:Fm->Fm->Fm
@@ -33,49 +34,13 @@ Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Library "prog.ml". 
  |Exis(x:SetVars)(f:Fm): Fm
 .
 
-(* X represents finite ordinals with transitive-closure membership. *)Inductive X := Ord :> nat -> X.
-| Ord :> nat -> X.
+(* ? Inductive X := nat. *)
+Inductive X := 
+| Se :> nat -> X.
 
-(* In represents the membership relation between two ordinals using transitive-closure. *)
-Definition membership_model := "Finite ordinals with transitive-closure membership".
-Definition In (x1 x2 : X) : Prop :=
-  match x1, x2 with
-  | Ord n1, Ord n2 => n1 < n2
-  end.
-
-Definition membership_model := "Finite ordinals with transitive-closure membership".
-
-(* union_axiom represents the union axiom. Validated for finite ordinals with transitive-closure membership. *)Axiom union_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
-(* pairing_axiom represents the pairing axiom. Validated for finite ordinals with transitive-closure membership. *)Axiom pairing_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
-(* equality_axiom represents the equality axiom. Validated for finite ordinals with transitive-closure membership. *)Axiom equality_axiom : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. := "Finite ordinals with transitive-closure membership".
-Definition zf_fragment_validated := "Ordinal hierarchy".
-(* ZF fragment validated for finite ordinals with transitive-closure membership. *)
-
-Theorem membership_transitive : forall x y z : X, In x y -> In y z -> In x z.
-Proof.
-  intros x y z H1 H2.
-  destruct x; destruct y; destruct z.
-  simpl in H1; simpl in H2.
-  apply Nat.lt_trans in H1.
-  apply Nat.lt_trans in H2.
-  apply Nat.lt_trans.
-  assumption.
-Qed.
-
-Theorem soundness : forall (x y : X), In x y -> x < y.
-Proof.
-  intros x y H.
-  destruct x; destruct y.
-  - simpl in H. apply H.
-  - simpl in H. inversion H.
-Qed. := "Ordinal hierarchy".
-
-Axiom reflexivity : forall x : X, In x x.
-Axiom antisymmetry : forall x y : X, In x y -> In y x -> x = y.
-Axiom transitivity : forall x y z : X, In x y -> In y z -> In x z.
-Axiom extensionality : forall x y : X, (forall z : X, In z x <-> In z y) -> x = y. 
+Definition In (x1 x2:X) := 
 match x1, x2 with
-| Ord n1, Ord n2 => n1 < n2
+| Se n1, Se n2 => n1 < n2
 end.
 
 Definition SetVars_eqb r xi :=
@@ -103,7 +68,7 @@ Fixpoint teI
    (val:SetVars->X) (t:Terms): X :=
    match t with
    | FVC s => val s
-   | FSC f t0 => fsI f (Vector.map (teI val) t0))
+   (*| FSC f t0 => fsI f (Vector.map (teI val) t0)*)
    end.
 
 
@@ -257,7 +222,7 @@ End PREPR.
 
 Extraction Language OCaml.
 
-Extraction "prog.ml" PREPR. Extraction Blacklist. Extraction Library "prog.ml". "prog.mli" PREPR. Extraction Blacklist "prog.mli". Extraction Blacklist "prog.mli".
+Extraction "prog.ml" PREPR.
 
 
 (* ---------- END ---------- *)
@@ -439,7 +404,7 @@ Record FSV := {
 }.
 
 Unset Elimination Schemes.
-(* Terms represents terms, including free variables, union, and pairing. *)Inductive Terms : Type :=
+Inductive Terms : Type :=
 | FVC :> SetVars.t -> Terms
 | FSC (f:FSV) : (Vector.t Terms (fsv f)) -> Terms.
 Set Elimination Schemes.

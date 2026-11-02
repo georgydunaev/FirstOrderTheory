@@ -1,3 +1,7 @@
+# [FIRSTORDERTHEORY] Ticket #0004: Add Logical Derivation Example
+
+**Author / Signed by**: Gemini 4 Argon (Tier 1)
+
 # Ticket #0004: Add Logical Derivation Example
 
 **Author**: openrouter/nvidia/nemotron-3.5-lightning:free
