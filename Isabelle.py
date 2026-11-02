@@ -17,5 +17,13 @@ from src.formalized_theorems import (
     Econj,
     Edisj,
     Eimp,
+    idsubst,
+    dosubst,
+    addtotctx,
+    EVar,
+    ECon,
+    ELam,
+    EApp,
+    TypeOfTerm,
     some_function,
 )

@@ -1,4 +1,5 @@
 Require Import Coq.Vectors.Vector.
+Require Import Coq.Arith.PeanoNat.
 (* This file will contain higher-order logic that is needed for Isabelle/ZF *)
 
 Section FormalSystem.
@@ -22,8 +23,26 @@ Inductive Types : Type :=
 Definition idsubst : nat -> Types
  := fun (n:nat) => TVar n.
 
+(*
 Definition dosubst (subst : nat -> Types) (T : Types) : Types
  := T. (* TODO *)
+*)
+
+Fixpoint dosubst (subst : nat -> Types) (T : Types) : Types :=
+  match T with
+  | TVar n => subst n
+  | TProp => TProp
+  | TImp T1 T2 => TImp (dosubst subst T1) (dosubst subst T2)
+  end.
+
+Theorem dosubst_id : forall (T : Types), dosubst idsubst T = T.
+Proof.
+  intro T.
+  induction T as [n | | T1 IHT1 T2 IHT2].
+  - reflexivity.
+  - reflexivity.
+  - simpl. rewrite IHT1, IHT2. reflexivity.
+Defined.
 
 Context (termconstants : Set).
 (* Context (termval : termconstants -> nat). *)
@@ -53,12 +72,18 @@ Definition addtotctx : TCtx -> nat -> Types -> TCtx
   := fun G n tau => (fun m => {G m}+{m=n}).
 *)
 
+Definition addtotctx (G : TCtx) (n : nat) (tau : Types) : TCtx
+  := fun m => if Nat.eqb m n then tau else G m.
+
 Inductive TPrf :  TCtx -> Terms -> Types -> Type :=
 | PEHyp G (xn: nat) (tau : Types) : TPrf G (EVar xn) (G xn)
 | PEConType G (c : termconstants) (subst : nat -> Types) :
     TPrf G (ECon c subst) (dosubst subst (Sigma c))
 | PEApp G t u tau sigma : TPrf G t (TImp tau sigma) -> TPrf G u tau -> TPrf G (EApp t u) sigma
+(*
 | PELam G x t tau sigma: TPrf G t sigma -> TPrf G (ELam x tau t ) (TImp tau sigma)  (* TODO: FIX! *)
+*)
+| PELam G x t tau sigma : TPrf (addtotctx G x tau) t sigma -> TPrf G (ELam x tau t) (TImp tau sigma)
 .
 End TPrf_sec.
 Context (proofconstants:Set).

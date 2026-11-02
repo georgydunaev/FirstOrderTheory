@@ -43,5 +43,24 @@ class TestFormalizedTheorems(unittest.TestCase):
         self.assertEqual(PTT(Edisj), TImp(TO, TImp(TO, TO)))
         self.assertEqual(PTT(Eimp), TImp(TO, TImp(TO, TO)))
 
+    def test_dosubst_and_typing_context(self):
+        tau = TImp(TVar(0), TImp(TProp, TVar(1)))
+        self.assertEqual(dosubst(idsubst, tau), tau)
+        subst = lambda n: TO if n == 0 else TI
+        self.assertEqual(dosubst(subst, tau), TImp(TO, TImp(TProp, TI)))
+
+        ctx = addtotctx(idsubst, 0, TProp)
+        self.assertEqual(ctx(0), TProp)
+        self.assertEqual(ctx(1), TVar(1))
+
+        # Identity combinator \x0:TProp. x0 has type TProp => TProp
+        id_term = ELam(0, TProp, EVar(0))
+        self.assertEqual(TypeOfTerm(idsubst, id_term), TImp(TProp, TProp))
+        # Polymorphic BA instantiated at TO applied to (\x0:TO. TP x0)
+        ba_to = ECon(BA, lambda n: TO if n == 0 else TVar(n))
+        self.assertEqual(TypeOfTerm(idsubst, ba_to), TImp(TImp(TO, TProp), TProp))
+        lam_tp = ELam(0, TO, EApp(ECon(TP), EVar(0)))
+        self.assertEqual(TypeOfTerm(idsubst, EApp(ba_to, lam_tp)), TProp)
+
 if __name__ == '__main__':
     unittest.main()

@@ -230,12 +230,12 @@ The active part (lines 1–228) specialises the machinery of §2 to a **membersh
   Proved: `assu : Prf (Iimpl P P)`, `dropL`, `dropR`, `TrueI : Prf (ITrue)`; `Deduction` is
   aborted; `bigunion` encodes the existential as an inductive type. The file ends mid-definition
   (§6, ticket #7244).
-- **`OneFileIsabelle.v`** — declares `Types := TVar | TProp | TImp`, terms with λ (`EVar`, `ECon`,
-  `EApp`, `ELam`) and a typing judgment
+- **`OneFileIsabelle.v`** — declares `Types := TVar | TProp | TImp`, recursive type substitution
+  `dosubst` with identity lemma `dosubst_id`, terms with λ (`EVar`, `ECon`, `EApp`, `ELam`), context
+  extension `addtotctx`, and a typing judgment
   `TPrf : (nat -> Types) -> Terms -> Types -> Type` (hypothesis lookup `PEHyp`, constant typing
-  `PEConType`, application `PEApp`, abstraction `PELam`), then a separate `Proofs` datatype for
-  *proof terms* (`PVar`, `PCon`, `PApp1/2`, `PLam1/2`). Marked TODO: type substitution
-  `dosubst := T` and the λ-rule's context handling.
+  `PEConType`, application `PEApp`, abstraction `PELam` using `addtotctx G x tau`), plus a separate
+  `Proofs` datatype for *proof terms* (`PVar`, `PCon`, `PApp1/2`, `PLam1/2`).
 
 ---
 
@@ -277,7 +277,7 @@ machine-checked here. What *was* verified, by the test suite above (all 20 tests
 | 3 | `Isabelle.v` | Three parse blockers (a stray top-level `D`, a stray `end.`, a duplicate `Inductive Terms`) were **commented out (text preserved) in this pass**; the file still has a `(* STOP *)` marker, a suspicious `TP => TImp TO TI` (the constructor's own comment says `Trueprop : o => prop`), and the unverified `Require Import Decidable`. Compilation must be re-checked once `coqc` is available. | #7241 |
 | 4 | `IsabelleAlt.v:70` | `Theorem Deduction (P Q:prop) (H : Prf P -> Prf Q) : Prf (Iimpl P Q).` ends in **`Abort.`** — the deduction theorem is missing. | #7244 |
 | 5 | `IsabelleAlt.v:126` | The file **ends with a body-less** `Fixpoint q (n:nat) :=` (incomplete definition ⇒ parse error at EOF). | #7244 |
-| 6 | `OneFileIsabelle.v:26,61` | `dosubst subst T := T (* TODO *)` and the `PELam` rule (`TODO: FIX!` — λ-abstraction does not extend the typing context). | #7244 |
+| 6 | `OneFileIsabelle.v` | `dosubst` (`Fixpoint` + `dosubst_id`) and `PELam` (`addtotctx G x tau`) implemented while preserving the original `TODO` variants in comments; `Proofs` typing judgment remains future work. | #7244 |
 | 7 | `OneFileZFC.v:41-44` | `∈` is interpreted as `<` on `nat`; no ZF axioms, no `EQ` atom, no pairing/union terms yet — soundness w.r.t. real set membership is future work. | #7243 |
 | 8 | `Makefile` / `printer.ml` | `make go` needs a `prog.mli` that `Extraction` does not produce, and `printer.ml` prints the stub `Prog.thm2`, which does not exist in the extracted output. The OCaml pipeline therefore cannot run end-to-end yet. | #7242 |
 | 9 | environment | `coqc` is unavailable in this container, so none of the Coq files can be machine-checked in CI here; a `coqc`-based job (e.g. `coqc OneFile.v && coqc OneFileZFC.v`) is the natural next verification step. | #7242 |
