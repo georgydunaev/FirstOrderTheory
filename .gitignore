@@ -12,3 +12,9 @@ a.out
 
 # Test artifacts
 test_results/
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*.class
+.pytest_cache/
