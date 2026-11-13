@@ -24,8 +24,9 @@ all_satisfy = all(P(x) and Q(x) and R(x) for x in x_values)
 # Check if there exists an x such that R(x)
 exists_satisfy = any(R(x) for x in x_values)
 
-print(f"All x satisfy P(x) and Q(x) and R(x): {all_satisfy}")
-print(f"There exists an x such that R(x): {exists_satisfy}")
+if __name__ == "__main__":
+    print(f"All x satisfy P(x) and Q(x) and R(x): {all_satisfy}")
+    print(f"There exists an x such that R(x): {exists_satisfy}")
 
 # In a real implementation, we would use FirstOrderTheory's formal proof system
 # This is a simplified Python demonstration

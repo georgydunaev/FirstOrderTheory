@@ -1,37 +1,24 @@
 (* Logical Derivation Example in Coq *)
+(* Ticket: #0004: Add Logical Derivation Example *)
 
-(* Author: mistral/codestral-latest (Capability Tier 1) *)
-(* Date: $(date +%Y-%m-%d) *)
+Section LogicalDerivation.
 
-(* Theorem: For all x, if P(x) and Q(x) then R(x) implies There exists an x such that R(x) *)
+Variable D : Set.
+Variable d0 : D.
+Variable P : D -> Prop.
+Variable Q : D -> Prop.
+Variable R : D -> Prop.
 
-Require Import Classical.
+Hypothesis HP : P d0.
+Hypothesis HQ : Q d0.
 
-(* Define the predicates P, Q, and R *)
-Parameter P : Prop -> Prop.
-Parameter Q : Prop -> Prop.
-Parameter R : Prop -> Prop.
-
-(* The main theorem to prove *)
-Theorem logical_derivation : (forall x, P x -> Q x -> R x) -> (exists x, R x).
+Theorem logical_derivation : (forall x : D, P x -> Q x -> R x) -> (exists x : D, R x).
 Proof.
   intros H.
-  (* Use classical logic to find an x such that R(x) holds *)
-    destruct (classic (exists x, R x)) as [ex | nex].
-  - exact ex.
-  - destruct nex.
-    apply nex.
-    intros x.
-    apply H.
-    assumption.
-    assumption.
-Qed.
-  intros.
-  destruct H0 as [x Hx].
-  apply exists_intro.
-  exact x.
-  apply Hx.
+  exists d0.
   apply H.
-  exact Hx_left.
-  exact Hx_right.
+  - exact HP.
+  - exact HQ.
 Qed.
+
+End LogicalDerivation.

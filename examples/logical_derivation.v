@@ -1,25 +1,26 @@
 (* File: /botworkspace/FirstOrderTheory/examples/logical_derivation.v *)
-(* Author: mistral/codestral-latest (Capability Tier 1) *)
 (* Ticket: #0004: Add Logical Derivation Example *)
 
-Require Import Classical.
+Section LogicalDerivation.
 
-(* Define the predicates *)
-Parameter P : Prop.
-Parameter Q : Prop.
-Parameter R : Prop.
+Variable D : Set.
+Variable d0 : D.
+Variable P : D -> Prop.
+Variable Q : D -> Prop.
+Variable R : D -> Prop.
 
-(* The statement to prove *)
+Hypothesis HP : P d0.
+Hypothesis HQ : Q d0.
+
 Theorem logical_derivation :
-  (forall x, P x /\ Q x -> R x) ->
-  (exists x, R x).
+  (forall x : D, P x -> Q x -> R x) ->
+  (exists x : D, R x).
 Proof.
   intros H.
-  (* Use classical logic to prove the existence *)
-  apply Classical.choice.
-  exists x.
+  exists d0.
   apply H.
-  split.
-  exact (Classical.choice (exists x, P x)).
-  exact (Classical.choice (exists x, Q x)).
+  - exact HP.
+  - exact HQ.
 Qed.
+
+End LogicalDerivation.

@@ -496,6 +496,43 @@ Proof.
   - intros M val. reflexivity.
 Qed.
 
+Theorem subst_preserves_qf : forall phi t x,
+  is_quantifier_free phi ->
+  is_quantifier_free (subst_form t x phi).
+Proof.
+  induction 1; simpl.
+  - apply qf_atom.
+  - apply qf_bot.
+  - apply qf_conj; assumption.
+  - apply qf_disj; assumption.
+  - apply qf_impl; assumption.
+Qed.
+
+Theorem skolem_unary_instantiation_qf : forall x psi t,
+  is_quantifier_free psi ->
+  is_quantifier_free (subst_form t x psi).
+Proof.
+  intros x psi t Hqf.
+  apply subst_preserves_qf. exact Hqf.
+Qed.
+
+Fixpoint instantiate_universal_prefix (vars : list nat) (ts : list term) (mat : formula) : formula :=
+  match vars, ts with
+  | x :: rest_x, t :: rest_t => subst_form t x (instantiate_universal_prefix rest_x rest_t mat)
+  | _, _ => mat
+  end.
+
+Theorem instantiate_universal_prefix_qf : forall vars ts mat,
+  is_quantifier_free mat ->
+  is_quantifier_free (instantiate_universal_prefix vars ts mat).
+Proof.
+  induction vars as [ | x rest_x IH ]; intros ts mat Hqf.
+  - simpl. destruct ts; simpl; exact Hqf.
+  - destruct ts as [ | t rest_t ]; simpl.
+    + exact Hqf.
+    + apply subst_preserves_qf. apply IH. exact Hqf.
+Qed.
+
 (** SECTION 6: HILBERT-STYLE FIRST-ORDER DERIVATION AND DEDUCTION THEOREM **)
 
 Inductive Prf : list formula -> formula -> Prop :=
@@ -663,6 +700,65 @@ Proof.
   - intro H. apply Prf_deduction_converse; assumption.
 Qed.
 
+Lemma Prf_forall_inst : forall ctx x A t,
+  Prf ctx (FForall x A) -> Prf ctx (subst_form t x A).
+Proof.
+  intros ctx x A t H.
+  eapply H_MP.
+  - exact H.
+  - apply H_Ax_AllInst.
+Qed.
+
+Lemma Prf_forall2_inst : forall ctx x y A sx sy,
+  Nat.eqb y x = false ->
+  Prf ctx (FForall x (FForall y A)) ->
+  Prf ctx (subst_form sy y (subst_form sx x A)).
+Proof.
+  intros ctx x y A sx sy Hneq H.
+  apply Prf_forall_inst with (t := sx) in H.
+  simpl in H. rewrite Hneq in H.
+  apply Prf_forall_inst with (t := sy) in H.
+  exact H.
+Qed.
+
+Lemma Prf_exists_intro : forall ctx x A t,
+  Prf ctx (subst_form t x A) -> Prf ctx (FExists x A).
+Proof.
+  intros ctx x A t H.
+  eapply H_MP.
+  - exact H.
+  - apply H_Ax_ExIntro.
+Qed.
+
+Lemma Prf_conj_intro : forall ctx A B,
+  Prf ctx A -> Prf ctx B -> Prf ctx (FConj A B).
+Proof.
+  intros ctx A B HA HB.
+  eapply H_MP.
+  - exact HB.
+  - eapply H_MP.
+    + exact HA.
+    + apply H_Ax_ConjIntro.
+Qed.
+
+Lemma Prf_conj_elim_l : forall ctx A B,
+  Prf ctx (FConj A B) -> Prf ctx A.
+Proof.
+  intros ctx A B H.
+  eapply H_MP.
+  - exact H.
+  - apply H_Ax_Conj1.
+Qed.
+
+Lemma Prf_conj_elim_r : forall ctx A B,
+  Prf ctx (FConj A B) -> Prf ctx B.
+Proof.
+  intros ctx A B H.
+  eapply H_MP.
+  - exact H.
+  - apply H_Ax_Conj2.
+Qed.
+
 (** SECTION 7: SKOLEM NORMAL FORM AND EQUISATISFIABILITY **)
 
 Inductive is_skolem_form : formula -> Prop :=
@@ -677,10 +773,129 @@ Proof.
   - apply prenex_forall. exact IHis_skolem_form.
 Qed.
 
+Fixpoint num_existentials (phi : formula) : nat :=
+  match phi with
+  | FAtom _ _ => 0
+  | FBot => 0
+  | FConj p1 p2 | FDisj p1 p2 | FImpl p1 p2 =>
+      num_existentials p1 + num_existentials p2
+  | FForall _ p1 => num_existentials p1
+  | FExists _ p1 => S (num_existentials p1)
+  end.
+
+Fixpoint num_universals (phi : formula) : nat :=
+  match phi with
+  | FAtom _ _ => 0
+  | FBot => 0
+  | FConj p1 p2 | FDisj p1 p2 | FImpl p1 p2 =>
+      num_universals p1 + num_universals p2
+  | FForall _ p1 => S (num_universals p1)
+  | FExists _ p1 => num_universals p1
+  end.
+
+Lemma qf_num_existentials_zero : forall phi,
+  is_quantifier_free phi -> num_existentials phi = 0.
+Proof.
+  induction 1; simpl; auto.
+  - rewrite IHis_quantifier_free1, IHis_quantifier_free2; reflexivity.
+  - rewrite IHis_quantifier_free1, IHis_quantifier_free2; reflexivity.
+  - rewrite IHis_quantifier_free1, IHis_quantifier_free2; reflexivity.
+Qed.
+
+Lemma skolem_num_existentials_zero : forall phi,
+  is_skolem_form phi -> num_existentials phi = 0.
+Proof.
+  induction 1.
+  - apply qf_num_existentials_zero. exact H.
+  - simpl. exact IHis_skolem_form.
+Qed.
+
+Lemma prenex_no_exists_is_skolem : forall phi,
+  is_prenex_form phi -> num_existentials phi = 0 -> is_skolem_form phi.
+Proof.
+  induction 1; intros H0.
+  - apply skolem_qf. exact H.
+  - simpl in H0. apply skolem_forall. apply IHis_prenex_form. exact H0.
+  - simpl in H0. discriminate H0.
+Qed.
+
+Theorem prenex_zero_existentials_iff_skolem : forall phi,
+  is_prenex_form phi ->
+  (num_existentials phi = 0 <-> is_skolem_form phi).
+Proof.
+  intros phi Hpr.
+  split.
+  - apply prenex_no_exists_is_skolem; assumption.
+  - intro Hsk. apply skolem_num_existentials_zero; assumption.
+Qed.
+
+Definition prefix_all_forall (pfx : prefix) : Prop :=
+  forall q x, In (q, x) pfx -> q = QForall.
+
+Lemma qf_prefix_all_forall : forall phi,
+  is_quantifier_free phi -> prefix_all_forall (quantifier_prefix phi).
+Proof.
+  intros phi Hqf.
+  destruct (qf_prefix_nil phi Hqf) as [Hp _].
+  rewrite Hp.
+  intros q x HIn.
+  destruct HIn.
+Qed.
+
+Lemma skolem_prefix_all_forall : forall phi,
+  is_skolem_form phi -> prefix_all_forall (quantifier_prefix phi).
+Proof.
+  induction 1.
+  - apply qf_prefix_all_forall. exact H.
+  - simpl. intros q y [Heq | HIn].
+    + injection Heq as Hq Hy. symmetry. exact Hq.
+    + apply IHis_skolem_form with (x := y). exact HIn.
+Qed.
+
+Lemma skolem_matrix_is_qf : forall phi,
+  is_skolem_form phi -> is_quantifier_free (matrix phi).
+Proof.
+  induction 1.
+  - destruct (qf_prefix_nil phi H) as [_ Hm].
+    rewrite Hm. exact H.
+  - simpl. exact IHis_skolem_form.
+Qed.
+
+Theorem skolem_decomposition : forall phi,
+  is_skolem_form phi ->
+  phi = apply_prefix (quantifier_prefix phi) (matrix phi) /\
+  is_quantifier_free (matrix phi) /\
+  prefix_all_forall (quantifier_prefix phi).
+Proof.
+  intros phi Hsk.
+  assert (Hpr : is_prenex_form phi) by (apply skolem_is_prenex; exact Hsk).
+  destruct (matrix_prefix_decomp phi Hpr) as [Hdecomp Hqf].
+  split; [ exact Hdecomp | split; [ exact Hqf | ] ].
+  apply skolem_prefix_all_forall. exact Hsk.
+Qed.
+
+Theorem universal_prefix_yields_skolem : forall pfx mat,
+  is_quantifier_free mat ->
+  prefix_all_forall pfx ->
+  is_skolem_form (apply_prefix pfx mat).
+Proof.
+  induction pfx as [ | [q x] rest IH ]; intros mat Hqf Hall.
+  - simpl. apply skolem_qf. exact Hqf.
+  - simpl.
+    assert (Hq : q = QForall).
+    { apply Hall with (x := x). left. reflexivity. }
+    subst q.
+    apply skolem_forall.
+    apply IH.
+    + exact Hqf.
+    + intros q0 x0 HIn. apply Hall with (x := x0). right. exact HIn.
+Qed.
+
 Section SkolemEquisatisfiability.
 
 Variable D_dom : Type.
 Variable R_rel : D_dom -> D_dom -> Prop.
+Variable R3_rel : D_dom -> D_dom -> D_dom -> Prop.
 
 Theorem skolem_functional_equisatisfiable :
   (exists f : D_dom -> D_dom, forall x : D_dom, R_rel x (f x)) ->
@@ -712,4 +927,84 @@ Proof.
   - apply skolem_functional_equisatisfiable.
 Qed.
 
+Theorem skolem_binary_functional_equisatisfiable :
+  (exists f : D_dom -> D_dom -> D_dom, forall x y : D_dom, R3_rel x y (f x y)) ->
+  (forall x y : D_dom, exists z : D_dom, R3_rel x y z).
+Proof.
+  intros [f Hf] x y.
+  exists (f x y).
+  apply Hf.
+Qed.
+
+Theorem skolem_binary_choice_equisatisfiable :
+  (forall (R0 : (D_dom * D_dom) -> D_dom -> Prop),
+     (forall p, exists z, R0 p z) -> exists f : (D_dom * D_dom) -> D_dom, forall p, R0 p (f p)) ->
+  ((forall x y : D_dom, exists z : D_dom, R3_rel x y z) <->
+   (exists f : D_dom -> D_dom -> D_dom, forall x y : D_dom, R3_rel x y (f x y))).
+Proof.
+  intro Hchoice.
+  split.
+  - intro Hall.
+    pose (R0 := fun (p : D_dom * D_dom) (z : D_dom) => R3_rel (fst p) (snd p) z).
+    assert (Hexists : forall p : D_dom * D_dom, exists z : D_dom, R0 p z).
+    { intros [x y]. apply Hall. }
+    destruct (Hchoice R0 Hexists) as [f_pair Hf_pair].
+    exists (fun x y => f_pair (x, y)).
+    intros x y.
+    apply (Hf_pair (x, y)).
+  - apply skolem_binary_functional_equisatisfiable.
+Qed.
+
+Theorem skolem_uniform_constant :
+  (exists y : D_dom, forall x : D_dom, R_rel x y) ->
+  (forall x : D_dom, exists y : D_dom, R_rel x y).
+Proof.
+  apply skolem_constant_equisatisfiable.
+Qed.
+
 End SkolemEquisatisfiability.
+
+(** SECTION 8: MODEL-THEORETIC EQUISATISFIABILITY **)
+
+Definition equisatisfiable (phi psi : formula) : Prop :=
+  satisfiable phi <-> satisfiable psi.
+
+Theorem equisatisfiable_refl : forall phi,
+  equisatisfiable phi phi.
+Proof.
+  intro phi. unfold equisatisfiable. reflexivity.
+Qed.
+
+Theorem equisatisfiable_sym : forall phi psi,
+  equisatisfiable phi psi -> equisatisfiable psi phi.
+Proof.
+  intros phi psi H. unfold equisatisfiable in *. symmetry. exact H.
+Qed.
+
+Theorem equisatisfiable_trans : forall phi psi chi,
+  equisatisfiable phi psi -> equisatisfiable psi chi -> equisatisfiable phi chi.
+Proof.
+  intros phi psi chi H1 H2.
+  unfold equisatisfiable in *.
+  rewrite H1. exact H2.
+Qed.
+
+Theorem sem_equiv_implies_equisatisfiable : forall phi psi,
+  sem_equiv phi psi -> equisatisfiable phi psi.
+Proof.
+  intros phi psi Hequiv.
+  unfold equisatisfiable, satisfiable.
+  split; intros [M [val Hval]]; exists M, val.
+  - apply (Hequiv M val). exact Hval.
+  - apply (Hequiv M val). exact Hval.
+Qed.
+
+Theorem prenex_equiv_equisatisfiable : forall phi psi,
+  is_prenex_form psi ->
+  sem_equiv phi psi ->
+  equisatisfiable phi psi.
+Proof.
+  intros phi psi _ Hequiv.
+  apply sem_equiv_implies_equisatisfiable.
+  exact Hequiv.
+Qed.
