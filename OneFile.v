@@ -562,6 +562,41 @@ destruct m.
     apply nic. left. trivial.
 Defined.
 
+(* Converse of the Deduction Theorem (Deduction Inversion / Weakening) *)
+Fixpoint weaken_PREPR (A:Fo) {ctx:list Fo} {B:Fo} (m: PREPR ctx B) 
+  (Hnic: forall xi, NotParamC xi ctx -> isParamF xi A = false) {struct m} : PREPR (cons A ctx) B.
+Proof.
+  destruct m.
+  - apply hyp_E. right. exact i.
+  - apply Hax_E. exact p.
+  - apply MP_E with (A := A0).
+    + apply weaken_PREPR; assumption.
+    + apply weaken_PREPR; assumption.
+  - eapply GEN_E.
+    + intros F [Heq | Hin].
+      * subst F. apply Hnic. exact nic.
+      * apply nic. exact Hin.
+    + apply weaken_PREPR; assumption.
+Defined.
+
+Definition Ded_inv (A B:Fo) (il:list Fo) (m: PREPR il (A --> B))
+  (Hnic: forall xi, NotParamC xi il -> isParamF xi A = false) : PREPR (cons A il) B :=
+  MP_E (cons A il) A B (hyp_E (cons A il) A (inl eq_refl)) (weaken_PREPR A m Hnic).
+
+Definition Ded_inv_closed (A B:Fo) (il:list Fo) (m: PREPR il (A --> B))
+  (Hcl: forall xi, isParamF xi A = false) : PREPR (cons A il) B :=
+  Ded_inv A B il m (fun xi _ => Hcl xi).
+
+Theorem Deduction_Theorem_equiv (A B:Fo) (il:list Fo)
+  (Hnic: forall xi, NotParamC xi il -> isParamF xi A = false) :
+  (PREPR (cons A il) B -> PREPR il (A --> B)) *
+  (PREPR il (A --> B) -> PREPR (cons A il) B).
+Proof.
+  split.
+  - exact (@Ded A B il).
+  - intro m. exact (Ded_inv A B il m Hnic).
+Defined.
+
 Definition swap_args ctx A B C :
 (PREPR ctx ((A --> (B --> C)) --> (B --> (A --> C)) )).
 Proof.

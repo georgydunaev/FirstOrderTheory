@@ -10,6 +10,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 COQ_FILES = [
     os.path.join(ROOT, "OneFile.v"),
+    os.path.join(ROOT, "Prenex.v"),
     os.path.join(ROOT, "OneFileZFC.v"),
     os.path.join(ROOT, "Isabelle.v"),
     os.path.join(ROOT, "IsabelleAlt.v"),
