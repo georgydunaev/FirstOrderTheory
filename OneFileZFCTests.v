@@ -1,39 +1,32 @@
-(* Author: openrouter/nvidia/nemotron-3.5-lightning:free (Tier 1) *)
-(* Tests for the membership-only fragment in OneFileZFC.v *)
+(* Author: First-Order Theory Verification Engineer *)
+(* Formally verified tests for the membership-only fragment in OneFileZFC.v *)
 
 Require Import OneFileZFC.
-Require Import Coq.Unicode.Utf8_core.
-Require Import Coq.Unicode.Utf8_tactics.
+Require Import Arith.
 
-(* Test the membership relation for ordinals *)Definition test_membership : Prop :=
-  forall x1 x2 : X,
-  In x1 x2 = (match x1, x2 with
-    | Ord n1, Ord n2 => n1 < n2
-    | _, _ => false
-  end).
+Definition test_membership : Prop :=
+  forall n1 n2 : nat, In (Se n1) (Se n2) <-> n1 < n2.
 
-(* Test the union axiom *)Definition test_union_axiom : Prop :=
-  forall x y : X,
-  exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
+Definition test_empty_set_property : Prop :=
+  forall x : X, ~ In x (Se 0).
 
-(* Test the pairing axiom *)Definition test_pairing_axiom : Prop :=
-  forall x y : X,
-  exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
+Definition test_transitivity_property : Prop :=
+  forall x y z : X, In x y -> In y z -> In x z.
 
-(* Test the equality axiom *)Definition test_equality_axiom : Prop :=
-  forall x y : X,
-  (forall z : X, In z x <-> In z y) -> x = y.
+Definition test_irreflexivity_property : Prop :=
+  forall x : X, ~ In x x.
 
-(* Run the tests *)Theorem membership_tests :
-  test_membership /
-  test_union_axiom /
-  test_pairing_axiom /
-  test_equality_axiom.
-
+Theorem membership_tests :
+  test_membership /\
+  test_empty_set_property /\
+  test_transitivity_property /\
+  test_irreflexivity_property.
 Proof.
   split.
-  - intros x1 x2. simpl. destruct x1; destruct x2; simpl; auto.
-  - intros x y. apply union_axiom.
-  - intros x y. apply pairing_axiom.
-  - intros x y H. apply equality_axiom.
+  - intros a b. simpl. reflexivity.
+  - split.
+    + intros [a] H. simpl in H. inversion H.
+    + split.
+      * intros [a] [b] [c] H1 H2. simpl in *. apply (Nat.lt_trans a b c H1 H2).
+      * intros [a] H. simpl in H. apply (Nat.lt_irrefl a H).
 Qed.

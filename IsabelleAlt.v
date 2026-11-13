@@ -123,4 +123,4 @@ Inductive bigunion {A} (f:A -> Type) : Type :=
 (*| z : f 0 -> bigunion
 | s : forall n : nat,  *)
 
-Fixpoint q (n:nat) :=
+(* Fixpoint q (n:nat) := (* Incomplete definition at EOF - preserved per Ticket 7244 *) *)

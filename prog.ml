@@ -1,48 +1,51 @@
-(* This file is manually created based on the extracted Coq definitions *)
 
-(* SetVars represents set variables. *)
-type set_vars = Va of int
+type __ = Obj.t
 
-(* Terms represents terms, including free variables, union, and pairing. *)
-type terms =
-  | FVC of set_vars
-  | Fsunion of terms
-  | Fspair of terms * terms
+type nat =
+| O
+| S of nat
 
-(* AtomFm represents atomic formulas, including membership and equality. *)
-type atom_fm =
-  | IN of terms * terms
-  | EQ of terms * terms
+type setVars = nat
+  (* singleton inductive, whose constructor was Va *)
 
-(* Fm represents formulas, including atomic formulas, conjunction, disjunction, implication, and quantifiers. *)
+type terms = setVars
+  (* singleton inductive, whose constructor was FVC *)
+
+type atomFm =
+| IN of terms * terms
+
 type fm =
-  | Atom of atom_fm
-  | Bot
-  | Conj of fm * fm
-  | Disj of fm * fm
-  | Impl of fm * fm
-  | Fora of set_vars * fm
-  | Exis of set_vars * fm
+| Atom of atomFm
+| Bot
+| Conj of fm * fm
+| Disj of fm * fm
+| Impl of fm * fm
+| Fora of setVars * fm
+| Exis of setVars * fm
 
-(* X represents ordinals. *)
-type x = Ord of int
+type pROCA =
+| Ha1 of fm * fm
+| Ha2 of fm * fm * fm
+| Ha3 of fm * fm
+| Ha4 of fm * fm
+| Ha5 of fm * fm
+| Ha6 of fm * fm
+| Ha7 of fm * fm
+| Ha8 of fm * fm * fm
+| Ha9 of fm * fm
+| Ha10 of fm * fm
 
-(* In represents the membership relation between two ordinals. *)
-let in_relation x1 x2 =
-  match x1, x2 with
-  | Ord n1, Ord n2 -> n1 < n2
+type pRECA =
+| PRO of fm * pROCA
+| Ha12 of fm * terms * setVars * fm
+| Ha13 of fm * terms * setVars * fm
+| Hb1 of fm * fm * setVars
+| Hb2 of fm * fm * setVars
 
-(* membership_model represents the model of finite ordinals with transitive-closure membership. *)
-let membership_model = "Finite ordinals with transitive-closure membership"
+type 'a inL = __
 
-(* union_axiom represents the union axiom. *)
-let union_axiom x y = failwith "Axiom not implemented"
-
-(* pairing_axiom represents the pairing axiom. *)
-let pairing_axiom x y = failwith "Axiom not implemented"
-
-(* equality_axiom represents the equality axiom. *)
-let equality_axiom x y = failwith "Axiom not implemented"
-
-(* zf_fragment_validated represents the validated fragment of ZF set theory. *)
-let zf_fragment_validated = "Ordinal hierarchy"
+type pREPR =
+| Hyp_E of fm * fm inL
+| Hax_E of fm * pRECA
+| MP_E of fm * fm * pREPR * pREPR
+| GEN_E of fm * setVars * pREPR

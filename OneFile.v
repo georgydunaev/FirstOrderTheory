@@ -42,13 +42,11 @@ Fixpoint ATS_B0 b (n:nat) (l:t bool n) :
 fold_left orb false (b :: l)  = orb b (fold_left orb false l) .
 Proof.
 destruct l.
-simpl. firstorder.
-simpl.
-destruct b.
-simpl.
-apply ATS_B2.
-simpl.
-reflexivity.
+- destruct b; reflexivity.
+- simpl.
+  destruct b.
+  + simpl. apply ATS_B2.
+  + reflexivity.
 Defined.
 
 Definition ATS_G h (n:nat) (l:Vector.t bool n) : Prop :=
@@ -1149,37 +1147,83 @@ End cor.
 
 
 (*Include replace_variable_with_itself.*)
+Lemma replxixiT (xi:SetVars.t) (u:Terms) : substT (FVC xi) xi u = u.
+Proof.
+induction u.
+- simpl. destruct (SetVars.eqb sv xi) eqn:E.
+  + apply SetVars.eqb_eq in E. subst. reflexivity.
+  + reflexivity.
+- simpl. apply ap. apply eq_nth_iff.
+  intros p1 p2 ppe.
+  rewrite (nth_map _ _ _ p2 ppe).
+  apply H.
+Defined.
+
+Lemma replxixiT_vec (p: PSV) (xi:SetVars.t) (ts: Vector.t Terms (psv p)) :
+  Vector.map (substT (FVC xi) xi) ts = ts.
+Proof.
+apply eq_nth_iff.
+intros p1 p2 H0.
+rewrite -> (nth_map (substT (FVC xi) xi) ts p1 p2 H0).
+apply replxixiT.
+Defined.
+
 Fixpoint replxixiF (xi:SetVars.t) A: substF xi xi A = Some A.
 Proof.
+induction A.
+- simpl. rewrite replxixiT_vec. reflexivity.
+- reflexivity.
+- simpl. rewrite IHA1, IHA2. reflexivity.
+- simpl. rewrite IHA1, IHA2. reflexivity.
+- simpl. rewrite IHA1, IHA2. reflexivity.
+- cbn [substF]. destruct (isParamF xi (Fora x A)) eqn:Ep.
+  + destruct (isParamT x (FVC xi)) eqn:Eq.
+    * simpl in Eq. rewrite eqb_comm in Eq.
+      simpl in Ep. rewrite Eq in Ep. discriminate Ep.
+    * rewrite IHA. reflexivity.
+  + reflexivity.
+- cbn [substF]. destruct (isParamF xi (Exis x A)) eqn:Ep.
+  + destruct (isParamT x (FVC xi)) eqn:Eq.
+    * simpl in Eq. rewrite eqb_comm in Eq.
+      simpl in Ep. rewrite Eq in Ep. discriminate Ep.
+    * rewrite IHA. reflexivity.
+  + reflexivity.
+Defined.
 
-Admitted.
+(* Preserved original identity statement:
+Lemma forall_swap_orig A x y :
+ PREPR nil (Fora y (Fora x A) --> Fora y (Fora x A)).
+Proof.
+...
+Defined.
+*)
 
 Lemma forall_swap A x y :
- PREPR nil (Fora y (Fora x A) --> Fora y (Fora x A)).
+ PREPR nil (Fora y (Fora x A) --> Fora x (Fora y A)).
 Proof.
 apply Ded.
 apply GEN_E.
 + intros B [H1|H2].
   - rewrite <- H1.
     simpl.
+    destruct (SetVars.eqb y x); trivial.
     rewrite Facts.eqb_refl. trivial.
   - destruct H2.
 + apply GEN_E.
   - intros B [H1|H2].
     * rewrite <- H1.
       simpl.
-      rewrite Facts.eqb_refl.
-      destruct (SetVars.eqb y x); trivial.
+      rewrite Facts.eqb_refl. trivial.
     * destruct H2.
   - eapply MP_E.
     2 : { apply Hax_E.
           eapply (Ha12 A x x).
           apply replxixiF. }
-  * eapply MP_E.
+    eapply MP_E.
     2 : { apply Hax_E.
           eapply (Ha12 (Fora x A) y y).
           apply replxixiF. }
-  apply hyp_E. left. trivial.
+    apply hyp_E. left. trivial.
 Defined.
 
 (*Check eqb_refl.

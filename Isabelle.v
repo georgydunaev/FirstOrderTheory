@@ -221,7 +221,7 @@ Theorem Vars_dec : forall (a b:Vars), (a=b)\/not(a=b).
 Proof.
 intros.
 destruct a as [n], b as [m].
-Search nat.
+(* Search nat. *)
 destruct (Nat.eq_dec n m) as [A|B].
 auto.
 right.

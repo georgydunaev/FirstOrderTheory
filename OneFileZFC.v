@@ -1244,10 +1244,47 @@ End cor.
 
 
 (*Include replace_variable_with_itself.*)
+Lemma replxixiT (xi:SetVars.t) (u:Terms) : substT (FVC xi) xi u = u.
+Proof.
+induction u.
+- simpl. destruct (SetVars.eqb sv xi) eqn:E.
+  + apply SetVars.eqb_eq in E. subst. reflexivity.
+  + reflexivity.
+- simpl. apply ap. apply eq_nth_iff.
+  intros p1 p2 ppe.
+  rewrite (nth_map _ _ _ p2 ppe).
+  apply H.
+Defined.
+
+Lemma replxixiT_vec (p: PSV) (xi:SetVars.t) (ts: Vector.t Terms (psv p)) :
+  Vector.map (substT (FVC xi) xi) ts = ts.
+Proof.
+apply eq_nth_iff.
+intros p1 p2 H0.
+rewrite -> (nth_map (substT (FVC xi) xi) ts p1 p2 H0).
+apply replxixiT.
+Defined.
+
 Fixpoint replxixiF (xi:SetVars.t) A: substF xi xi A = Some A.
 Proof.
-
-Admitted.
+induction A.
+- simpl. rewrite replxixiT_vec. reflexivity.
+- reflexivity.
+- simpl. rewrite IHA1, IHA2. reflexivity.
+- simpl. rewrite IHA1, IHA2. reflexivity.
+- simpl. rewrite IHA1, IHA2. reflexivity.
+- cbn [substF]. destruct (isParamF xi (Fora x A)) eqn:Ep.
+  + destruct (isParamT x (FVC xi)) eqn:Eq.
+    * simpl in Eq. rewrite eqb_comm in Eq.
+      simpl in Ep. rewrite Eq in Ep. discriminate Ep.
+    * rewrite IHA. reflexivity.
+  + reflexivity.
+- cbn [substF]. destruct (isParamF xi (Exis x A)) eqn:Ep.
+  + destruct (isParamT x (FVC xi)) eqn:Eq.
+    * simpl in Eq. rewrite eqb_comm in Eq.
+      simpl in Ep. rewrite Eq in Ep. discriminate Ep.
+    * rewrite IHA. reflexivity.
+  + reflexivity.
 
 Lemma forall_swap A x y :
  PREPR nil (Fora y (Fora x A) --> Fora y (Fora x A)).

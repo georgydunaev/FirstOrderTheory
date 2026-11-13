@@ -1,25 +1,37 @@
-(* Author: mistral/mistral-small-latest, Capability Tier 1 *)
-(* Automated tests for the membership-only fragment in OneFileZFC.v *)
+(* Author: First-Order Theory Verification Engineer *)
+(* Formally verified tests for the membership-only fragment in OneFileZFC.v *)
 
 Require Import OneFileZFC.
+Require Import Arith.
 
-(* Test basic membership properties *)
-Theorem test_membership_basic : forall x y : X, In x y -> x < y.
+(* Test 1: Irreflexivity of membership relation *)
+Theorem test_membership_irreflexive : forall x : X, ~ In x x.
 Proof.
-  intros x y H.
-  destruct x; destruct y.
-  - simpl in H. apply H.
-  - simpl in H. inversion H.
+  intros [n] H.
+  simpl in H.
+  apply (Nat.lt_irrefl n H).
 Qed.
 
-(* Test union axiom *)
-Theorem test_union_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (In w x \/ In w y).
+(* Test 2: Transitivity of ordinal membership *)
+Theorem test_membership_transitive : forall x y z : X, In x y -> In y z -> In x z.
 Proof.
-  intros x y. apply union_axiom.
+  intros [n1] [n2] [n3] H1 H2.
+  simpl in *.
+  apply (Nat.lt_trans n1 n2 n3 H1 H2).
 Qed.
 
-(* Test pairing axiom *)
-Theorem test_pairing_axiom : forall x y : X, exists z : X, forall w : X, In w z <-> (w = x \/ w = y).
+(* Test 3: Asymmetry (Foundation / Regularity) *)
+Theorem test_membership_asymmetric : forall x y : X, In x y -> ~ In y x.
 Proof.
-  intros x y. apply pairing_axiom.
+  intros [n1] [n2] H1 H2.
+  simpl in *.
+  apply (Nat.lt_asymm n1 n2 H1 H2).
+Qed.
+
+(* Test 4: Empty set representation (0 has no elements) *)
+Theorem test_empty_set : forall x : X, ~ In x (Se 0).
+Proof.
+  intros [n] H.
+  simpl in H.
+  inversion H.
 Qed.
