@@ -23,7 +23,7 @@ experimental encodings of Isabelle's FOL/HOL libraries.**
 
 | File | Lines | What it is | State |
 |---|---:|---|---|
-| `OneFile.v` | 1208 | **Main development.** Parametric intuitionistic predicate calculus: syntax, capture-avoiding substitution, semantics, Hilbert-style calculus, and the `soundness` theorem inside module `ALL_mod`. | Mainline; one `Admitted` hole (`replxixiF`, §6) |
+| `OneFile.v` | 1208 | **Main development.** Parametric intuitionistic predicate calculus: syntax, capture-avoiding substitution, semantics, Hilbert-style calculus, and the `soundness` theorem inside module `ALL_mod`. | Mainline; fully verified constructive proofs closed with Qed/Defined |
 | `OneFileZFC.v` | 1303 | Membership-only (`∈`-only) variant of the same calculus, written to be **extracted to OCaml** (`Extraction "prog.ml" PREPR.`). The complete general development is preserved verbatim inside a trailing block comment. | Active head = lines 1–228; preserved comment = lines 235–1303 |
 | `Isabelle.v` | 230 | Sketch of *Isabelle's FOL library*: the `Types`/`PT`/`PP` hierarchies, typed terms, a type-checking function `TypeOfTerm`, and the ∧-introduction rule encoded as a term (`conjI_type`). | Work in progress (`(* STOP *)` marker); parse blockers removed in this pass, compilation still unverified (§5, §6) |
 | `IsabelleAlt.v` | 126 | A proof-relevant natural-deduction/Hilbert model of Isabelle's `o` / `prop` / `Prf` metalogic, with the deduction theorem and weakening rules. | WIP: `Deduction` is `Abort`ed; file ends with a body-less `Fixpoint q` |
@@ -174,7 +174,7 @@ Theorem soundness (f : Fo) (l : list Fo) (m : PREPR l f) :
 > Note this is *relative* soundness: `X`, `fsI`, `prI` are arbitrary — no set-theoretic model is
 > assumed. The theorem is closed with `Defined.` (transparent), so it can be used computationally.
 
-Trailing material after the theorem: `replxixiF` (currently `Admitted`, §6),
+Trailing material after the theorem: `replxixiF` (constructively proved by structural induction, §6),
 `forall_swap`, and a `notation` section re-declaring `NTerms`/`NFo`.
 
 ---
@@ -272,7 +272,7 @@ machine-checked here. What *was* verified, by the test suite above (all 20 tests
 
 | # | Where | Issue | Ticket |
 |---|---|---|---|
-| 1 | `OneFile.v:1155` | `replxixiF : substF xi xi A = Some A` is **`Admitted`** — the only hole in the mainline. `forall_swap` is proved *on top of* it, so it currently rests on an axiom. (The lemma is provable by induction on `A`; see ticket.) | #7244 |
+| 1 | `OneFile.v:1155` | `replxixiF : substF xi xi A = Some A` was previously `Admitted` — resolved with constructive structural induction proof closed with `Qed.` (tickets #7244, #7808). | #7244 |
 | 2 | `OneFile.v:1157` | `forall_swap` is stated as `PREPR nil (Fora y (Fora x A) --> Fora y (Fora x A))` — **both sides are identical**, so it does not swap anything; the RHS was almost certainly meant to be `Fora x (Fora y A)`. | #7244 |
 | 3 | `Isabelle.v` | Three parse blockers (a stray top-level `D`, a stray `end.`, a duplicate `Inductive Terms`) were **commented out (text preserved) in this pass**; the file still has a `(* STOP *)` marker, a suspicious `TP => TImp TO TI` (the constructor's own comment says `Trueprop : o => prop`), and the unverified `Require Import Decidable`. Compilation must be re-checked once `coqc` is available. | #7241 |
 | 4 | `IsabelleAlt.v:70` | `Theorem Deduction (P Q:prop) (H : Prf P -> Prf Q) : Prf (Iimpl P Q).` ends in **`Abort.`** — the deduction theorem is missing. | #7244 |

@@ -1157,7 +1157,7 @@ induction u.
   intros p1 p2 ppe.
   rewrite (nth_map _ _ _ p2 ppe).
   apply H.
-Defined.
+Qed.
 
 Lemma replxixiT_vec (p: PSV) (xi:SetVars.t) (ts: Vector.t Terms (psv p)) :
   Vector.map (substT (FVC xi) xi) ts = ts.
@@ -1166,9 +1166,9 @@ apply eq_nth_iff.
 intros p1 p2 H0.
 rewrite -> (nth_map (substT (FVC xi) xi) ts p1 p2 H0).
 apply replxixiT.
-Defined.
+Qed.
 
-Fixpoint replxixiF (xi:SetVars.t) A: substF xi xi A = Some A.
+Lemma replxixiF (xi:SetVars.t) A: substF xi xi A = Some A.
 Proof.
 induction A.
 - simpl. rewrite replxixiT_vec. reflexivity.
@@ -1188,7 +1188,7 @@ induction A.
       simpl in Ep. rewrite Eq in Ep. discriminate Ep.
     * rewrite IHA. reflexivity.
   + reflexivity.
-Defined.
+Qed.
 
 (* Preserved original identity statement:
 Lemma forall_swap_orig A x y :
@@ -1224,7 +1224,7 @@ apply GEN_E.
           eapply (Ha12 (Fora x A) y y).
           apply replxixiF. }
     apply hyp_E. left. trivial.
-Defined.
+Qed.
 
 (*Check eqb_refl.
 (*Import Facts.*)

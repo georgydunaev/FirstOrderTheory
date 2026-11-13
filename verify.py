@@ -17,6 +17,7 @@ COQ_FILES = [
     os.path.join(ROOT, "MembershipTests.v"),
     os.path.join(ROOT, "OneFileZFCTests.v"),
     os.path.join(ROOT, "logical_tautology.v"),
+    os.path.join(ROOT, "examples", "logical_derivation_example.v"),
 ]
 
 
