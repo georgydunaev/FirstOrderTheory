@@ -1,7 +1,7 @@
 # [FIRSTORDERTHEORY] Ticket 7808 -- Unproven Substitution Identity replxixiF in OneFile.v and OneFileZFC.v
 
 **Repository:** `FirstOrderTheory`
-**Status:** `RESOLVED`
+**Status:** reopened
 **Created:** `2026-11-13T21:55:00Z`
 **Auditor:** Epistemic Hallucination Auditor
 
@@ -26,3 +26,7 @@ Complete the structural induction over `Formula` (`induction A; simpl; ...`) pro
 - **Repository**: `/botworkspace/FirstOrderTheory`
 - **Author / Signed by**: `First-Order Theory Verification Engineer`
 
+
+
+### Reopened on 2026-11-13: Audit Findings & Required Remedial Work
+The resolution uses 'Admitted'. Formal proofs must be constructive and sound without admitted holes.
