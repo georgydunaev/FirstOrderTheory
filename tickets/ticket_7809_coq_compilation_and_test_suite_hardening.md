@@ -1,7 +1,7 @@
 # [FIRSTORDERTHEORY · Ticket 7809] Full Coq Compilation Verification, Proof Gap Elimination, and Test Suite Hardening
 
 **Repository:** `FirstOrderTheory`
-**Status:** `RESOLVED`
+**Status:** reopened
 **Created:** `2026-11-13T21:55:00Z`
 **Author / Signed by:** `First-Order Theory Verification Engineer`
 
@@ -35,3 +35,7 @@
    - Enhanced `verify.py` to compile all 8 Coq files (`OneFile.v`, `OneFileZFC.v`, `Isabelle.v`, `IsabelleAlt.v`, `OneFileIsabelle.v`, `MembershipTests.v`, `OneFileZFCTests.v`, `logical_tautology.v`) with `-Q ROOT ""`.
    - Enforced strict failure assertion: non-zero `coqc` exit codes halt verification and return an error.
    - All 60 automated Python tests pass cleanly (100% test pass rate).
+
+
+### Reopened on 2026-11-13: Audit Findings & Required Remedial Work
+The resolution uses 'Admitted'. Formal proofs must be constructive and sound without admitted holes.
